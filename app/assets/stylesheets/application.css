@@ -14,3 +14,7 @@
  *= require_self
  *= require bootstrap/dist/css/bootstrap
  */
+
+a, a:visited, a:hover, a:active, a:link {
+    color: 	#F0F0F0 ;
+}
