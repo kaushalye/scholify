@@ -29,11 +29,11 @@
   </div>
   <div class="field">
     <%= f.label :student %><br>
-    <%= f.text_field :student , class:"form-control", :required => true%>
+    <%= f.collection_select( :student_id, Student.all, :id, :full_name, {:prompt=>true}, {:class=>'form-control', :required => true} ) %>
   </div>
   <div class="field">
     <%= f.label :sponsor %><br>
-    <%= f.text_field :sponsor , class:"form-control", :required => true%>
+    <%= f.collection_select( :sponsor_id, Sponsor.all, :id, :full_name, {:prompt=>true}, {:class=>'form-control', :required => true} ) %>
   </div>
   <div class="actions">
     <%= f.submit %>
