@@ -13,27 +13,27 @@
 
   <div class="field">
     <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
+    <%= f.text_field :amount , class:"form-control", :required => true%>
   </div>
   <div class="field">
     <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
+    <%= f.date_select :start_date , class:"form-control", :required => true%>
   </div>
   <div class="field">
     <%= f.label :end_date %><br>
-    <%= f.date_select :end_date %>
+    <%= f.date_select :end_date, class:"form-control", :required => true %>
   </div>
   <div class="field">
     <%= f.label :status %><br>
-    <%= f.text_field :status %>
+    <%= f.text_field :status , class:"form-control", :required => true%>
   </div>
   <div class="field">
     <%= f.label :student %><br>
-    <%= f.text_field :student %>
+    <%= f.text_field :student , class:"form-control", :required => true%>
   </div>
   <div class="field">
     <%= f.label :sponsor %><br>
-    <%= f.text_field :sponsor %>
+    <%= f.text_field :sponsor , class:"form-control", :required => true%>
   </div>
   <div class="actions">
     <%= f.submit %>
