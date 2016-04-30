@@ -1,0 +1,41 @@
+<%= form_for(@scholarship) do |f| %>
+  <% if @scholarship.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@scholarship.errors.count, "error") %> prohibited this scholarship from being saved:</h2>
+
+      <ul>
+      <% @scholarship.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.text_field :amount %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.date_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :student %><br>
+    <%= f.text_field :student %>
+  </div>
+  <div class="field">
+    <%= f.label :sponsor %><br>
+    <%= f.text_field :sponsor %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
