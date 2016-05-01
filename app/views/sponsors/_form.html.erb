@@ -12,7 +12,7 @@
   <% end %>
   <div class="field">
     <%= f.label :title %><br>
-    <%= select_tag :title, options_for_select(Sponsor::TITLES), class:"form-control", :required => true %>
+    <%= f.select :title, options_for_select(Sponsor::TITLES.map {|v| [ v, v]}, @sponsor.title), {}, {:class=>"form-control", :required => true} %>
   </div>
   <div class="field">
     <%= f.label :first_name %><br>

@@ -26,7 +26,7 @@
   </div>
   <div class="field">
     <%= f.label :status %><br>
-    <%= select_tag :status, options_for_select(Scholarship::STATUSES), class:"form-control", :required => true %>
+    <%= f.select :status, options_for_select(Scholarship::STATUSES.map {|v| [ v, v]}, @scholarship.status ), {}, {:class=>"form-control", :required => true} %>
   </div>
   <div class="field">
     <%= f.label :student %><br>
