@@ -69,6 +69,6 @@ class ScholarshipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def scholarship_params
-      params.require(:scholarship).permit(:amount, :start_date, :end_date, :status, :student, :sponsor)
+      params.require(:scholarship).permit(:amount, :start_date, :end_date, :status, :student_id, :sponsor_id)
     end
 end

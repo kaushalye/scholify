@@ -22,8 +22,8 @@
         <td><%= scholarship.start_date %></td>
         <td><%= scholarship.end_date %></td>
         <td><%= scholarship.status %></td>
-        <td><%= scholarship.student %></td>
-        <td><%= scholarship.sponsor %></td>
+        <td><%= scholarship.student.full_name %></td>
+        <td><%= scholarship.sponsor.full_name %></td>
         <td><%= link_to 'Show', scholarship, class: "btn btn-info" %></td>
         <td><%= link_to 'Edit', edit_scholarship_path(scholarship), class: "btn btn-warning" %></td>
         <td><%= link_to 'Destroy', scholarship, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>

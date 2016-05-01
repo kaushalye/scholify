@@ -26,15 +26,15 @@
   </div>
   <div class="field">
     <%= f.label :status %><br>
-    <%= f.select :status, options_for_select(Scholarship::STATUSES.map {|v| [ v, v]}, @scholarship.status ), {}, {:class=>"form-control", :required => true} %>
+    <%= f.select :status, options_for_select(Scholarship::STATUSES.map {|v| [ v, v]}, @scholarship.status ), {include_blank: 'Please select a status'}, {:class=>"form-control", :required => true} %>
   </div>
   <div class="field">
-    <%= f.label :student %><br>
-    <%= f.collection_select( :student_id, Student.all, :id, :full_name, {:prompt=>true}, {:class=>'form-control', :required => true} ) %>
+    <%= f.label :student_id %><br>
+    <%= f.collection_select :student_id, Student.all, :id, :full_name, {:prompt=>true}, {:class=>'form-control', :required => true} %>
   </div>
   <div class="field">
-    <%= f.label :sponsor %><br>
-    <%= f.collection_select( :sponsor_id, Sponsor.all, :id, :full_name, {:prompt=>true}, {:class=>'form-control', :required => true} ) %>
+    <%= f.label :sponsor_id %><br>
+    <%= f.collection_select :sponsor_id, Sponsor.all, :id, :full_name, {:prompt=>true}, {:class=>'form-control', :required => true} %>
   </div>
   <div class="actions">
     <%= f.submit class: "btn btn-primary" %>
