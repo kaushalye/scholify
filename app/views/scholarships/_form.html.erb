@@ -18,11 +18,11 @@
   </div>
   <div class="field">
     <%= f.label :start_date %><br>
-    <%= f.date_select :start_date , class:"form-control", :required => true%>
+    <%= f.date_select :start_date , {}, { :required => true} %>
   </div>
   <div class="field">
     <%= f.label :end_date %><br>
-    <%= f.date_select :end_date, class:"form-control", :required => true %>
+    <%= f.date_select :end_date, {}, { :required => true} %>
   </div>
   <div class="field">
     <%= f.label :status %><br>
