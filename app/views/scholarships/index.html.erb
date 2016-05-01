@@ -26,7 +26,7 @@
         <td><%= scholarship.sponsor.full_name %></td>
         <td><%= link_to 'Show', scholarship, class: "btn btn-info" %></td>
         <td><%= link_to 'Edit', edit_scholarship_path(scholarship), class: "btn btn-warning" %></td>
-        <td><%= link_to 'Destroy', scholarship, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+        <td><%= link_to 'Delete', scholarship, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>

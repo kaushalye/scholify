@@ -7,10 +7,19 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 puts "Seeding data..."
 
-5.times do |i|
+3.times do |i|
   Sponsor.create(title: "Mr", first_name:"John#{i}", last_name: "Doe#{i}", email: "jdoe#{i}@xyz.com", phone: "0430188909" )
 end
 
-8.times do |i|
+5.times do |i|
   Student.create(first_name:"Ann#{i}", last_name: "Mary#{i}", email: "amary#{i}@xyz.com", phone: "0437899090", address: "blah", faculty: "Engineering", department: "CSE" )
 end
+
+Scholarship.create(amount:25,
+                   start_date:DateTime.strptime("09/01/2016 19:00", "%m/%d/%Y %H:%M"),
+                   end_date: DateTime.strptime("09/01/2017 19:00", "%m/%d/%Y %H:%M"),
+                   status: Scholarship::STATUSES[0],
+                   sponsor_id:1,
+                   student_id:1,
+                   created_at:Time.now.to_datetime,
+                   updated_at:Time.now.to_datetime)
