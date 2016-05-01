@@ -13,3 +13,4 @@
 /tmp
 .keep
 /vendor/*
+config/secrets.yml

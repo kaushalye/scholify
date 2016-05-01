@@ -10,10 +10,11 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.text_field :amount , class:"form-control", :required => true%>
+    <%= f.label :amount %> <br>
+    <div class="input-group">
+      <span class="input-group-addon">$</span><%= f.text_field :amount, class:"form-control currency", :required => true%>
+    </div>
   </div>
   <div class="field">
     <%= f.label :start_date %><br>
@@ -25,7 +26,7 @@
   </div>
   <div class="field">
     <%= f.label :status %><br>
-    <%= f.text_field :status , class:"form-control", :required => true%>
+    <%= select_tag :status, options_for_select(Scholarship::STATUSES), class:"form-control", :required => true %>
   </div>
   <div class="field">
     <%= f.label :student %><br>
@@ -36,6 +37,6 @@
     <%= f.collection_select( :sponsor_id, Sponsor.all, :id, :full_name, {:prompt=>true}, {:class=>'form-control', :required => true} ) %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

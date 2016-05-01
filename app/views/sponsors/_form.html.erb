@@ -4,18 +4,17 @@
       <h2><%= pluralize(@sponsor.errors.count, "error") %> prohibited this sponsor from being saved:</h2>
 
       <ul>
-      <% @sponsor.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @sponsor.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title, class:"form-control", :required => true %>
+    <%= select_tag :title, options_for_select(Sponsor::TITLES), class:"form-control", :required => true %>
   </div>
-  <div class="fields">
+  <div class="field">
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name, class:"form-control", :required => true %>
   </div>

@@ -18,3 +18,9 @@
 a, a:visited, a:hover, a:active, a:link {
     color: 	#F0F0F0 ;
 }
+
+input.currency {
+    text-align: left;
+    padding-right: 15px;
+}
+
