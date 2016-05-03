@@ -8,6 +8,15 @@
         <li><%=link_to "Donations", donations_path%></li>
         <li><%=link_to "Payments", payments_path%></li>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+      <% if current_user %>
+        <li class="nav navbar-nav pull-right"><%= image_tag current_user.image_url, alt: current_user.name %></li>
+        <li class="nav navbar-nav pull-right"><%= link_to 'Log Out', logout_path, method: :delete %></li>
+      <% else %>
+        <!--<li><%=link_to 'Twitter', '/auth/twitter' %></li>-->
+          <li><%= link_to 'Google+', '/auth/google' %></li>
+      <% end %>
+      </ul>
     </div>
   </div>
 </header>
