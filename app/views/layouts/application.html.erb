@@ -9,7 +9,16 @@
 <body>
 <%= render "shared/menu" %>
 <div class="container">
-<%= yield %>
+<% if current_user %>
+    <%= yield %>
+<% else %>
+    <div class="jumbotron">
+      <h1>Please login!</h1>
+      <br>
+      <p>Please login using
+        <%= link_to 'Google+', '/auth/google', class: "btn btn-primary"  %> to continue...</p>
+    </div>
+<% end %>
 </div>
 <footer class="footer">
   <div class="container">

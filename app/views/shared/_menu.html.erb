@@ -3,11 +3,13 @@
     <div class="container">
       <ul class="nav navbar-nav">
         <li> <%= image_tag("logo.png", :alt => "rss feed") %></li>
+        <% if current_user %>
         <li><%=link_to "Sponsors", sponsors_path%></li>
         <li><%=link_to "Students", students_path%></li>
         <li><%=link_to "Scholarships", scholarships_path%></li>
         <li><%=link_to "Donations", donations_path%></li>
         <li><%=link_to "Payments", payments_path%></li>
+        <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <% if current_user %>
