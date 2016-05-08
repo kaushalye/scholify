@@ -8,7 +8,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
              image_size: 48,
              name: 'google',
              client_options: {:ssl =>
-                                {:ca_file => '/usr/local/etc/openssl/cert.pem'}
+                                { :verify => !Rails.env.development?}
                               }
            }
 end
