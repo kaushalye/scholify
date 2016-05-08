@@ -5,7 +5,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
              scope: 'profile',
              access_type: 'online',
              image_aspect_ratio: 'square',
-             image_size: 48,
+             image_size: 32,
              name: 'google',
              client_options: {:ssl =>
                                 { :verify => !Rails.env.development?}
