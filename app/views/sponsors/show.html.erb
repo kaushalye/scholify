@@ -1,12 +1,11 @@
 <p id="notice"><%= notice %></p>
-
+<%= link_to 'Back', sponsors_path %>
 <h1><%= @sponsor.title %>. <%= @sponsor.first_name %>  <%= @sponsor.last_name %></h1>
-<small>E:  <%= @sponsor.email %> T:  <%= @sponsor.phone %></small>
+<p> <small>E:  <%= @sponsor.email %> <br/> T:  <%= @sponsor.phone %></small></p>
 
 <div class="panel panel-default">
-  <div class="panel-heading">All scholarships</div>
+  <div class="panel-heading"><h4>Scholarships</h4></div>
   <div class="panel-body">
-
     <table class="table table-striped">
       <thead>
       <tr>
@@ -20,7 +19,6 @@
       <tbody>
       <% @sponsor.scholarships.each do |schol| %>
         <tr>
-          <!--<td><%= schol.id %></td>-->
           <td><%= link_to schol do%>  <%= schol.id %> <% end %></td>
           <td><%= link_to schol.student do%>  <%= schol.student.full_name %> <% end %></td>
           <td><%= schol.start_date %></td>
@@ -30,9 +28,37 @@
       <% end %>
       </tbody>
     </table>
-
   </div>
 </div>
 
-<%= link_to 'Edit', edit_sponsor_path(@sponsor) %> |
-<%= link_to 'Back', sponsors_path %>
+<br/>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Donations</h4></div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Donation id</th>
+        <th>Amount </th>
+        <th>Valid from</th>
+        <th>Num of months</th>
+        <th>Scholarship</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @sponsor.donations.each do |don| %>
+        <tr>
+          <td><%= link_to don do%>  <%= don.id %> <% end %></td>
+          <td><%= don.amount %></td>
+          <td><%= don.valid_from %></td>
+          <td><%= don.num_of_months %></td>
+          <td><%= link_to don.scholarship do%>  #<%= don.scholarship.id %> for <%= don.scholarship.student.full_name %> <% end %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
