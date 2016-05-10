@@ -1,29 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @sponsor.title %>
-</p>
+<h1><%= @sponsor.title %>. <%= @sponsor.first_name %>  <%= @sponsor.last_name %></h1>
+<small>E:  <%= @sponsor.email %> T:  <%= @sponsor.phone %></small>
 
-<p>
-  <strong>First name:</strong>
-  <%= @sponsor.first_name %>
-</p>
+<div class="panel panel-default">
+  <div class="panel-heading">All scholarships</div>
+  <div class="panel-body">
 
-<p>
-  <strong>Last name:</strong>
-  <%= @sponsor.last_name %>
-</p>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Scholarship id</th>
+        <th>For Student</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>State</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @sponsor.scholarships.each do |schol| %>
+        <tr>
+          <!--<td><%= schol.id %></td>-->
+          <td><%= link_to schol do%>  <%= schol.id %> <% end %></td>
+          <td><%= link_to schol.student do%>  <%= schol.student.full_name %> <% end %></td>
+          <td><%= schol.start_date %></td>
+          <td><%= schol.end_date %></td>
+          <td><%= schol.status %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
 
-<p>
-  <strong>Email:</strong>
-  <%= @sponsor.email %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @sponsor.phone %>
-</p>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_sponsor_path(@sponsor) %> |
 <%= link_to 'Back', sponsors_path %>
