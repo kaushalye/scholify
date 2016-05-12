@@ -6,9 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 puts "Seeding data..."
-3.times do |i|
+6.times do |i|
   fname = Faker::Name.first_name
-  Sponsor.create(title: "Mr", first_name:fname, last_name: Faker::Name.last_name, email: Faker::Internet.email(fname), phone:Faker::PhoneNumber.phone_number )
+  Sponsor.create(title: Sponsor::TITLES.sample, first_name:fname, last_name: Faker::Name.last_name, email: Faker::Internet.email(fname), phone:Faker::PhoneNumber.phone_number )
 end
 
 5.times do |i|
@@ -35,10 +35,10 @@ Donation.create(sponsor_id:2,
 
 Payment.create(student_id:1,
                 scholarship_id:1,
-                amount:2500,
-                from_account:12345,
-                to_account:45678,
-                external_ref: "ref",
-                notes: "Some notes",
+                amount:25,
+                from_account:Faker::Number.number(10),
+                to_account:Faker::Number.number(10),
+                external_ref: Faker::Lorem.characters(10),
+                notes: Faker::Lorem.sentence,
                 created_at:Time.now.to_datetime,
                 updated_at:Time.now.to_datetime)
