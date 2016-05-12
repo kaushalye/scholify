@@ -1,65 +1,90 @@
 <%= form_for(@bulk_transaction) do |f| %>
   <% if @bulk_transaction.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@bulk_transaction.errors.count, "error") %> prohibited this bulk_transaction from being saved:</h2>
+      <h2><%= pluralize(@bulk_transaction.errors.count, "error") %> prohibited this bulk_transaction from being
+        saved:</h2>
 
       <ul>
-      <% @bulk_transaction.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @bulk_transaction.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :settled_date %><br>
-    <%= f.date_select :settled_date %>
+
+  <div class="container-fluid">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-2 form-group">
+              <%= f.label :amount %>
+              <span class="input-group">
+              <span class="input-group-addon">$</span><%= f.text_field :amount, class: "form-control currency", :required => true %>
+            </span>
+            </div>
+            <div class="col-md-1 form-group">
+              <%= f.label :rate %>
+              <%= f.text_field :rate, class: "form-control" %>
+            </div>
+            <div class="col-md-3 form-group">
+              <%= f.label :"Amount in LKR" %>
+              <span class="input-group">
+              <span class="input-group-addon">Rs.</span><%= f.text_field :amount_lkr, class: "form-control currency", :required => true %>
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <%= f.label :sender %>
+        <%= f.text_field :sender, class: "form-control" %>
+      </div>
+      <div class="col-md-6 form-group">
+        <%= f.label :beneficiary %>
+        <%= f.text_field :beneficiary, class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 form-group">
+        <%= f.label :settled_date %><br>
+        <%= f.date_select :settled_date %>
+      </div>
+      <div class="col-md-3 form-group">
+        <%= f.label :bank_date %><br>
+        <%= f.date_select :bank_date %>
+      </div>
+      <div class="col-md-3 form-group">
+        <%= f.label :chq_no %><br>
+        <%= f.text_field :chq_no , class: "form-control"%>
+      </div>
+      <div class="col-md-3 form-group">
+        <%= f.label :bank_acc %><br>
+        <%= f.text_field :bank_acc, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 form-group">
+        <%= f.label :effective_year %><br>
+        <%= f.number_field :effective_year, class: "form-control" %>
+      </div>
+      <div class="col-md-3 form-group">
+        <%= f.label :effective_months %><br>
+        <%= f.number_field :effective_months, class: "form-control" %>
+      </div>
+      <div class="col-md-6 form-group">
+        <%= f.label :notes %><br>
+        <%= f.text_area :notes, class: "form-control" %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :sender %><br>
-    <%= f.text_field :sender %>
-  </div>
-  <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :amount_lkr %><br>
-    <%= f.text_field :amount_lkr %>
-  </div>
-  <div class="field">
-    <%= f.label :rate %><br>
-    <%= f.text_field :rate %>
-  </div>
-  <div class="field">
-    <%= f.label :bank_date %><br>
-    <%= f.date_select :bank_date %>
-  </div>
-  <div class="field">
-    <%= f.label :chq_no %><br>
-    <%= f.text_field :chq_no %>
-  </div>
-  <div class="field">
-    <%= f.label :bank_acc %><br>
-    <%= f.text_field :bank_acc %>
-  </div>
-  <div class="field">
-    <%= f.label :beneficiary %><br>
-    <%= f.text_field :beneficiary %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br>
-    <%= f.text_area :notes %>
-  </div>
-  <div class="field">
-    <%= f.label :effective_year %><br>
-    <%= f.number_field :effective_year %>
-  </div>
-  <div class="field">
-    <%= f.label :effective_months %><br>
-    <%= f.number_field :effective_months %>
-  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary"%>
   </div>
 <% end %>
