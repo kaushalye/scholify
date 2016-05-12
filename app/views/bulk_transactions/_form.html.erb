@@ -12,79 +12,117 @@
     </div>
   <% end %>
 
-
   <div class="container-fluid">
     <div class="panel panel-default">
       <div class="panel-body">
-        <div class="container-fluid">
           <div class="row">
             <div class="col-md-2 form-group">
               <%= f.label :amount %>
               <span class="input-group">
               <span class="input-group-addon">$</span><%= f.text_field :amount, class: "form-control currency", :required => true %>
-            </span>
+              </span>
             </div>
             <div class="col-md-1 form-group">
-              <%= f.label :rate %>
+              (x) <%= f.label :rate%>
               <%= f.text_field :rate, class: "form-control" %>
             </div>
+            <div class="col-md-2" >
+            </div>
             <div class="col-md-3 form-group">
-              <%= f.label :"Amount in LKR" %>
+              <%= f.label :"(=)"%>
               <span class="input-group">
-              <span class="input-group-addon">Rs.</span><%= f.text_field :amount_lkr, class: "form-control currency", :required => true %>
+              <span class="input-group-addon">Rs.</span><%= f.text_field :amount_lkr, class: "form-control currency",:readonly => true %>
             </span>
             </div>
           </div>
-        </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-6 form-group">
+      <div class="col-md-5 form-group">
         <%= f.label :sender %>
         <%= f.text_field :sender, class: "form-control" %>
       </div>
-      <div class="col-md-6 form-group">
+      <div class="col-md-5 form-group">
         <%= f.label :beneficiary %>
         <%= f.text_field :beneficiary, class: "form-control" %>
       </div>
     </div>
     <div class="row">
       <div class="col-md-3 form-group">
-        <%= f.label :settled_date %><br>
-        <%= f.date_select :settled_date %>
+        <%= f.label :"Cheque number" %><br>
+        <%= f.text_field :chq_no , class: "form-control"%>
+      </div>
+      <div class="col-md-3 form-group">
+        <%= f.label :"Bank Account" %><br>
+        <%= f.text_field :bank_acc, class: "form-control" %>
       </div>
       <div class="col-md-3 form-group">
         <%= f.label :bank_date %><br>
         <%= f.date_select :bank_date %>
       </div>
       <div class="col-md-3 form-group">
-        <%= f.label :chq_no %><br>
-        <%= f.text_field :chq_no , class: "form-control"%>
-      </div>
-      <div class="col-md-3 form-group">
-        <%= f.label :bank_acc %><br>
-        <%= f.text_field :bank_acc, class: "form-control" %>
+        <%= f.label :settled_date %><br>
+        <%= f.date_select :settled_date %>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-3 form-group">
+      <div class="col-md-2 form-group">
         <%= f.label :effective_year %><br>
         <%= f.number_field :effective_year, class: "form-control" %>
       </div>
-      <div class="col-md-3 form-group">
+      <div class="col-md-2 form-group">
         <%= f.label :effective_months %><br>
         <%= f.number_field :effective_months, class: "form-control" %>
       </div>
-      <div class="col-md-6 form-group">
+      <div class="col-md-8 form-group">
         <%= f.label :notes %><br>
         <%= f.text_area :notes, class: "form-control" %>
       </div>
     </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Following payments will be automatically added</h4></div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>For Scholarship</th>
+            <th>Status</th>
+            <th>Student </th>
+            <th>Amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>1</td>
+            <td>ACTIVE</td>
+            <td>John Banda </td>
+            <td>2500</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>ACTIVE</td>
+            <td>Rukmanie Devi</td>
+            <td>2500</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>ACTIVE</td>
+            <td>Don Juan</td>
+            <td>2500</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit class: "btn btn-primary"%>
+    </div>
+
   </div>
 
-  <div class="actions">
-    <%= f.submit class: "btn btn-primary"%>
-  </div>
+
 <% end %>
