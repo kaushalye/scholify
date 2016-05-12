@@ -1,6 +1,5 @@
 class CreateBulkTransactions < ActiveRecord::Migration
   def change
-    drop_table :bulk_transactions
     create_table :bulk_transactions do |t|
       t.date :settled_date
       t.string :sender
