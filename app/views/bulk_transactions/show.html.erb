@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Settled date:</strong>
+  <%= @bulk_transaction.settled_date %>
+</p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @bulk_transaction.sender %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @bulk_transaction.amount %>
+</p>
+
+<p>
+  <strong>Amount lkr:</strong>
+  <%= @bulk_transaction.amount_lkr %>
+</p>
+
+<p>
+  <strong>Rate:</strong>
+  <%= @bulk_transaction.rate %>
+</p>
+
+<p>
+  <strong>Bank date:</strong>
+  <%= @bulk_transaction.bank_date %>
+</p>
+
+<p>
+  <strong>Chq no:</strong>
+  <%= @bulk_transaction.chq_no %>
+</p>
+
+<p>
+  <strong>Bank acc:</strong>
+  <%= @bulk_transaction.bank_acc %>
+</p>
+
+<p>
+  <strong>Beneficiary:</strong>
+  <%= @bulk_transaction.beneficiary %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @bulk_transaction.notes %>
+</p>
+
+<p>
+  <strong>Effective year:</strong>
+  <%= @bulk_transaction.effective_year %>
+</p>
+
+<p>
+  <strong>Effective months:</strong>
+  <%= @bulk_transaction.effective_months %>
+</p>
+
+<%= link_to 'Edit', edit_bulk_transaction_path(@bulk_transaction) %> |
+<%= link_to 'Back', bulk_transactions_path %>

@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502131749) do
+ActiveRecord::Schema.define(version: 20160512022019) do
+
+  create_table "bulk_transactions", force: :cascade do |t|
+    t.date     "settled_date"
+    t.string   "sender",           limit: 255
+    t.decimal  "amount",                         precision: 10
+    t.decimal  "amount_lkr",                     precision: 10
+    t.decimal  "rate",                           precision: 10
+    t.date     "bank_date"
+    t.string   "chq_no",           limit: 255
+    t.string   "bank_acc",         limit: 255
+    t.string   "beneficiary",      limit: 255
+    t.text     "notes",            limit: 65535
+    t.integer  "effective_year",   limit: 4
+    t.integer  "effective_months", limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+  end
 
   create_table "donations", force: :cascade do |t|
     t.integer  "sponsor_id",     limit: 4
