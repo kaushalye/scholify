@@ -95,24 +95,14 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>1</td>
-            <td>ACTIVE</td>
-            <td>John Banda </td>
-            <td>2500</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>ACTIVE</td>
-            <td>Rukmanie Devi</td>
-            <td>2500</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>ACTIVE</td>
-            <td>Don Juan</td>
-            <td>2500</td>
-          </tr>
+          <% @bulk_transaction.target_schols.each do |schol| %>
+            <tr>
+              <td><%= schol.id%></td>
+              <td><%= schol.status%></td>
+              <td><%= schol.student.full_name%></td>
+              <td><%= schol.amount%></td>
+            </tr>
+          <% end %>
           </tbody>
         </table>
       </div>
