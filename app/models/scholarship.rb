@@ -8,4 +8,9 @@ class Scholarship < ActiveRecord::Base
   validates :sponsor, presence: true
 
   STATUSES = ['ACTIVE', 'INACTIVE', 'NOT STARTED']
+
+  def to_str
+    student.full_name
+  end
+
 end
