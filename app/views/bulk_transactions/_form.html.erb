@@ -19,19 +19,19 @@
             <div class="col-md-2 form-group">
               <%= f.label :amount %>
               <span class="input-group">
-              <span class="input-group-addon">$</span><%= f.text_field :amount, class: "form-control currency", :required => true %>
+              <span class="input-group-addon">$</span><%= f.number_field :amount, class: "form-control currency rate_calc", :required => true, :id => "amount_aud" %>
               </span>
             </div>
-            <div class="col-md-1 form-group">
+            <div class="col-md-2 form-group">
               (x) <%= f.label :rate%>
-              <%= f.text_field :rate, class: "form-control" %>
+              <%= f.number_field :rate, class: "form-control rate_calc", :id => "aud_lkr_rate" %>
             </div>
             <div class="col-md-2" >
             </div>
             <div class="col-md-3 form-group">
               <%= f.label :"(=)"%>
               <span class="input-group">
-              <span class="input-group-addon">Rs.</span><%= f.text_field :amount_lkr, class: "form-control currency",:readonly => true %>
+              <span class="input-group-addon">Rs.</span><%= f.text_field :amount_lkr, class: "form-control currency",:readonly => true, :id => "amount_lkr" %>
             </span>
             </div>
           </div>
