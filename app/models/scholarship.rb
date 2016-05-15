@@ -18,4 +18,15 @@ class Scholarship < ActiveRecord::Base
     where("status = :status AND end_date > :rightnow AND start_date < :rightnow", {status: "ACTIVE", rightnow: Time.now})
   end
 
+  def format_payment payment
+    "#{payment.year} - #{payment.month}"
+  end
+
+  def past_payments
+    Payment.for_scholarship self.id
+  end
+
+  def last_payment
+    Payment.last_payment self.id
+  end
 end

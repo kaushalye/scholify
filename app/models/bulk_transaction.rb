@@ -1,4 +1,5 @@
 class BulkTransaction < ActiveRecord::Base
+
   def eligible_payments
     payments = []
     schols = Scholarship.eligible_all

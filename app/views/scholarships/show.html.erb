@@ -1,34 +1,65 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Amount:</strong>
-  <%= @scholarship.amount %>
-</p>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @scholarship.start_date %>
-</p>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Scholarship for  <%= link_to @scholarship.student do%>  <%= @scholarship.student.full_name %> <% end %></h4></div>
+  <div class="panel-body">
+    <p>
+      <strong>Amount:</strong>
+      <%= @scholarship.amount %>
+    </p>
 
-<p>
-  <strong>End date:</strong>
-  <%= @scholarship.end_date %>
-</p>
+    <p>
+      <strong>Start date:</strong>
+      <%= @scholarship.start_date %>
+    </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @scholarship.status %>
-</p>
+    <p>
+      <strong>End date:</strong>
+      <%= @scholarship.end_date %>
+    </p>
 
-<p>
-  <strong>Student:</strong>
-  <%= @scholarship.student.full_name %>
-</p>
+    <p>
+      <strong>Status:</strong>
+      <%= @scholarship.status %>
+    </p>
+    <p>
+      <strong>Sponsor:</strong>
+      <%= link_to @scholarship.sponsor do%>  <%= @scholarship.sponsor.full_name %> <% end %>
+    </p>
+    <br/>
+  </div>
+</div>
+<div class="text-info">
+  Last payment received for <%= @scholarship.format_payment(@scholarship.last_payment) %>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Past Payments</h4></div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Payment id</th>
+        <th>Amount </th>
+        <th>Year</th>
+        <th>Month</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @scholarship.past_payments.each do |payment| %>
+        <tr>
+          <td><%= payment.id %></td>
+          <td><%= payment.amount %></td>
+          <td><%= payment.year %></td>
+          <td><%= payment.month %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<p>
-  <strong>Sponsor:</strong>
-  <%= @scholarship.sponsor.full_name %>
-</p>
+<%= link_to 'Edit', edit_scholarship_path(@scholarship) %> |<%= link_to 'Back', scholarships_path %>
 
-<%= link_to 'Edit', edit_scholarship_path(@scholarship) %> |
-<%= link_to 'Back', scholarships_path %>
+
+
