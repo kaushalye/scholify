@@ -11,19 +11,21 @@ puts "Seeding data..."
   Sponsor.create(title: Sponsor::TITLES.sample, first_name:fname, last_name: Faker::Name.last_name, email: Faker::Internet.email(fname), phone:Faker::PhoneNumber.phone_number )
 end
 
+#create 5 studennts and a scholarship to each
 5.times do |i|
   fname = Faker::Name.first_name
-  Student.create(first_name: fname, last_name: Faker::Name.last_name, email: Faker::Internet.email(fname), phone:Faker::PhoneNumber.phone_number , address: "#{Faker::Address.street_address}, #{Faker::Address.city_prefix } #{Faker::Address.city_suffix}, #{Faker::Address.state} " , faculty: Student::FACULTIES.sample, department: Student::DEPARTMENTS.sample )
-end
+  student = Student.create(first_name: fname, last_name: Faker::Name.last_name, email: Faker::Internet.email(fname), phone:Faker::PhoneNumber.phone_number , address: "#{Faker::Address.street_address}, #{Faker::Address.city_prefix } #{Faker::Address.city_suffix}, #{Faker::Address.state} " , faculty: Student::FACULTIES.sample, department: Student::DEPARTMENTS.sample )
 
-Scholarship.create(amount:25,
-                   start_date: Faker::Date.between(2.days.ago, Date.today),#DateTime.strptime("09/01/2016 19:00", "%m/%d/%Y %H:%M"),
-                   end_date: Faker::Date.between(1.year.from_now, 2.year.from_now), #DateTime.strptime("09/01/2017 19:00", "%m/%d/%Y %H:%M"),
-                   status: Scholarship::STATUSES.sample,
-                   sponsor_id:1,
-                   student_id:1,
-                   created_at:Time.now.to_datetime,
-                   updated_at:Time.now.to_datetime)
+  Scholarship.create(amount:25,
+                     start_date: Faker::Date.between(5.months.ago, Date.today),#DateTime.strptime("09/01/2016 19:00", "%m/%d/%Y %H:%M"),
+                     end_date: Faker::Date.between(1.year.from_now, 2.year.from_now), #DateTime.strptime("09/01/2017 19:00", "%m/%d/%Y %H:%M"),
+                     status: Scholarship::STATUSES[0],
+                     sponsor_id:1,
+                     student_id:student.id,
+                     created_at:Time.now.to_datetime,
+                     updated_at:Time.now.to_datetime)
+
+end
 
 Donation.create(sponsor_id:2,
                  scholarship_id:1,
@@ -33,12 +35,32 @@ Donation.create(sponsor_id:2,
                  created_at:Time.now.to_datetime,
                  updated_at:Time.now.to_datetime)
 
-Payment.create(student_id:1,
-                scholarship_id:1,
-                amount:25,
-                from_account:Faker::Number.number(10),
-                to_account:Faker::Number.number(10),
-                external_ref: Faker::Lorem.characters(10),
-                notes: Faker::Lorem.sentence,
-                created_at:Time.now.to_datetime,
-                updated_at:Time.now.to_datetime)
+bulk_tx = BulkTransaction.create(settled_date:Date.today,
+                       sender: Faker::Name.first_name,
+                       amount: 100,
+                       amount_lkr: 10000,
+                       rate: 100,
+                       bank_date: Date.today,
+                       chq_no: Faker::Number.number(10),
+                       bank_acc: Faker::Number.number(10),
+                       beneficiary: Faker::Name.first_name,
+                       notes:Faker::Lorem.sentence,
+                       effective_year: 2016,
+                       effective_months: 3
+                )
+#add two payments for student 1
+2.times do |i|
+  Payment.create(student_id:1,
+                 scholarship_id:1,
+                 year: Date.today.year,
+                 month:i+1,
+                 amount:25,
+                 from_account:Faker::Number.number(10),
+                 to_account:Faker::Number.number(10),
+                 external_ref: Faker::Lorem.characters(10),
+                 notes: Faker::Lorem.sentence,
+                 bulk_transactions_id:bulk_tx.id,
+                 created_at:Time.now.to_datetime,
+                 updated_at:Time.now.to_datetime)
+
+end

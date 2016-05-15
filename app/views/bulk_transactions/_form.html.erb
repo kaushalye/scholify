@@ -19,7 +19,7 @@
             <div class="col-md-2 form-group">
               <%= f.label :amount %>
               <span class="input-group">
-              <span class="input-group-addon">$</span><%= f.number_field :amount, class: "form-control currency rate_calc", :required => true, :id => "amount_aud" %>
+              <span class="input-group-addon">$</span><%= f.number_field :amount, class: "form-control currency rate_calc", :required => true, :id => "amount_aud", :value => @bulk_transaction.eligible_payments.map { |h| h['amount']}.sum %>
               </span>
             </div>
             <div class="col-md-2 form-group">
@@ -83,24 +83,26 @@
     </div>
 
     <div class="panel panel-default">
-      <div class="panel-heading"><h4>Following payments will be automatically added</h4></div>
+      <div class="panel-heading"><h4>Following payments will be automatically added. <span class="text-danger"> Total: $ <%= @bulk_transaction.eligible_payments.map { |h| h['amount']}.sum %> </span>  </h4></div>
       <div class="panel-body">
         <table class="table table-striped">
           <thead>
           <tr>
-            <th>For Scholarship</th>
+            <th>Scholarship</th>
+            <th>Year - Month</th>
             <th>Status</th>
             <th>Student </th>
             <th>Amount</th>
           </tr>
           </thead>
           <tbody>
-          <% @bulk_transaction.target_schols.each do |schol| %>
+          <% @bulk_transaction.eligible_payments.each do |payment| %>
             <tr>
-              <td><%= schol.id%></td>
-              <td><%= schol.status%></td>
-              <td><%= schol.student.full_name%></td>
-              <td><%= schol.amount%></td>
+              <td><%= payment['schol_id']%></td>
+              <td><%= payment['year']%> - <%= payment['month']%></td>
+              <td><%= payment['status']%></td>
+              <td><%= payment['student_full_name']%></td>
+              <td><%= payment['amount']%></td>
             </tr>
           <% end %>
           </tbody>

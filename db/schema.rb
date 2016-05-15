@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512114354) do
+ActiveRecord::Schema.define(version: 20160515082846) do
 
   create_table "bulk_transactions", force: :cascade do |t|
     t.date     "settled_date"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 20160512114354) do
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
     t.integer  "bulk_transactions_id", limit: 4
+    t.integer  "month",                limit: 4
+    t.integer  "year",                 limit: 4
   end
 
   add_index "payments", ["bulk_transactions_id"], name: "index_payments_on_bulk_transactions_id", using: :btree
