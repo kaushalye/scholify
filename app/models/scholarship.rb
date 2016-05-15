@@ -8,6 +8,7 @@ class Scholarship < ActiveRecord::Base
   validates :sponsor, presence: true
 
   STATUSES = ['ACTIVE', 'INACTIVE', 'NOT STARTED']
+  NUM_OF_SCHOLS_PER_YEAR = 10
 
   def to_str
     student.full_name

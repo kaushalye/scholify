@@ -16,7 +16,7 @@ end
   fname = Faker::Name.first_name
   student = Student.create(first_name: fname, last_name: Faker::Name.last_name, email: Faker::Internet.email(fname), phone:Faker::PhoneNumber.phone_number , address: "#{Faker::Address.street_address}, #{Faker::Address.city_prefix } #{Faker::Address.city_suffix}, #{Faker::Address.state} " , faculty: Student::FACULTIES.sample, department: Student::DEPARTMENTS.sample )
 
-  Scholarship.create(amount:25,
+  Scholarship.create(amount:2500,
                      start_date: Faker::Date.between(5.months.ago, Date.today),#DateTime.strptime("09/01/2016 19:00", "%m/%d/%Y %H:%M"),
                      end_date: Faker::Date.between(1.year.from_now, 2.year.from_now), #DateTime.strptime("09/01/2017 19:00", "%m/%d/%Y %H:%M"),
                      status: Scholarship::STATUSES[0],
@@ -27,7 +27,7 @@ end
 
 end
 
-Donation.create(sponsor_id:2,
+Donation.create(sponsor_id:1,
                  scholarship_id:1,
                  amount:250,
                  valid_from:Date.today,
@@ -54,7 +54,7 @@ bulk_tx = BulkTransaction.create(settled_date:Date.today,
                  scholarship_id:1,
                  year: Date.today.year,
                  month:i+1,
-                 amount:25,
+                 amount:2500,
                  from_account:Faker::Number.number(10),
                  to_account:Faker::Number.number(10),
                  external_ref: Faker::Lorem.characters(10),

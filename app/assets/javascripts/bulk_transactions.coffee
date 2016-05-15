@@ -4,4 +4,5 @@
 console.log("page load 8989")
 $(document).ready ->
   $('.rate_calc').on 'blur', () ->
-    $('#amount_lkr').val($('#amount_aud').val() * $('#aud_lkr_rate').val())
+    rate = $('#aud_lkr_rate').val()
+    $('#amount_aud').val($('#amount_lkr').val() / rate) if rate > 0

@@ -4,13 +4,13 @@
 <p> <small>E:  <%= @sponsor.email %> <br/> T:  <%= @sponsor.phone %></small></p>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><h4>Scholarships</h4></div>
+  <div class="panel-heading"><h4>Currently sponsoring</h4></div>
   <div class="panel-body">
     <table class="table table-striped">
       <thead>
       <tr>
+        <th>Student</th>
         <th>Scholarship id</th>
-        <th>For Student</th>
         <th>Start date</th>
         <th>End date</th>
         <th>State</th>
@@ -19,8 +19,8 @@
       <tbody>
       <% @sponsor.scholarships.each do |schol| %>
         <tr>
-          <td><%= link_to schol do%>  <%= schol.id %> <% end %></td>
           <td><%= link_to schol.student do%>  <%= schol.student.full_name %> <% end %></td>
+          <td><%= link_to schol do%>  <%= schol.id %> <% end %></td>
           <td><%= schol.start_date %></td>
           <td><%= schol.end_date %></td>
           <td><%= schol.status %></td>
@@ -34,7 +34,7 @@
 <br/>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><h4>Donations</h4></div>
+  <div class="panel-heading"><h4>Past Donations</h4></div>
   <div class="panel-body">
     <table class="table table-striped">
       <thead>
@@ -47,13 +47,13 @@
       </tr>
       </thead>
       <tbody>
-      <% @sponsor.donations.each do |don| %>
+      <% @sponsor.donations.each do |donation| %>
         <tr>
-          <td><%= link_to don do%>  <%= don.id %> <% end %></td>
-          <td><%= don.amount %></td>
-          <td><%= don.valid_from %></td>
-          <td><%= don.num_of_months %></td>
-          <td><%= link_to don.scholarship do%>  #<%= don.scholarship.id %> for <%= don.scholarship.student.full_name %> <% end %></td>
+          <td><%= link_to donation do%>  <%= donation.id %> <% end %></td>
+          <td><%= donation.amount %></td>
+          <td><%= donation.valid_from %></td>
+          <td><%= donation.num_of_months %></td>
+          <td><%= link_to donation.scholarship do%>  #<%= donation.scholarship.id %> for <%= donation.scholarship.student.full_name %> <% end %></td>
         </tr>
       <% end %>
       </tbody>
