@@ -1,10 +1,10 @@
 class BulkTransaction < ActiveRecord::Base
   def eligible_payments
     payments = []
-    schols = Scholarship.where("status = :status AND end_date > :rightnow AND start_date < :rightnow", {status: "ACTIVE", rightnow: Time.now})
+    schols = Scholarship.eligible_all
     schols.each do |schol|
       pay_start = schol.start_date.month
-      last_payment = Payment.where(:scholarship_id => schol.id).order(:month).last
+      last_payment = Payment.last_payment(schol.id)
       #This schol has a payment entry, update the pay start
       if (last_payment)
         pay_start = last_payment.month+1
