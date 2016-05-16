@@ -49,11 +49,11 @@ bulk_tx = BulkTransaction.create(settled_date:Date.today,
                        effective_months: 3
                 )
 #add two payments for student 1
-2.times do |i|
+(20162 .. 20164).each do |i|
   Payment.create(student_id:1,
                  scholarship_id:1,
-                 year: Date.today.year,
-                 month:i+1,
+                 year: nil,
+                 month:i,
                  amount:2500,
                  from_account:Faker::Number.number(10),
                  to_account:Faker::Number.number(10),

@@ -15,7 +15,7 @@ class Scholarship < ActiveRecord::Base
   end
 
   def self.eligible_all
-    where("status = :status AND end_date > :rightnow AND start_date < :rightnow", {status: "ACTIVE", rightnow: Time.now})
+    where("status = :status AND end_date > :when AND start_date < :when", {status: "ACTIVE", when: Date.today})
   end
 
   def format_payment payment

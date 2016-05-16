@@ -21,7 +21,7 @@
       <tr>
         <td><%= payment.student.full_name %></td>
         <td><%= payment.scholarship.id %></td>
-        <td><%= payment.year %> - <%= payment.month %></td>
+        <td><%= payment.month / 10 %> - <%= payment.month % 10 %></td>
         <td><%= payment.amount %></td>
         <td><%= payment.from_account %></td>
         <td><%= payment.to_account %></td>

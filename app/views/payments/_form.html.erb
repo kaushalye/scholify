@@ -46,7 +46,6 @@
             <th>Student</th>
             <th>Year - Month</th>
             <th>Scholarship</th>
-            <th>Start date</th>
             <th>Status</th>
             <th>Amount (Rs.)</th>
           </tr>
@@ -54,11 +53,10 @@
           <tbody>
           <% Payment.eligible_payments.each do |payment| %>
             <tr>
-              <td><%=f.check_box :month, class: "checkbox", :id => "#{payment['year']}-#{payment['month']}"  %></td>
+              <td><%=f.check_box :month,  checked: true, :id => "#{payment['month']}"  %></td>
               <td><%= payment['student_full_name']%></td>
-              <td><%= payment['year']%>-<%= payment['month']%></td>
-              <td><%= payment['schol_id']%></td>
-              <td><%= payment['schol_start']%></td>
+              <td><%= payment['month'] / 10 %>-<%= payment['month'] % 10%></td>
+              <td><%= payment['schol_id']%> (<%= payment['schol_start']%> - <%= payment['schol_end']%>)</td>
               <td><%= payment['status']%></td>
               <td><%= payment['amount']%></td>
             </tr>
