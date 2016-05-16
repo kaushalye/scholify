@@ -17,13 +17,13 @@
       <div class="panel-body">
           <div class="row">
             <div class="col-md-2 form-group">
-              <%= f.label :amount_lkr %>
+              <%= f.label :amount %>
               <span class="input-group">
-              <span class="input-group-addon">Rs</span><%= f.number_field :amount, class: "form-control currency rate_calc", :required => true, :id => "amount_lkr", :value => @bulk_transaction.eligible_payments.map { |h| h['amount']}.sum %>
+              <span class="input-group-addon">$</span><%= f.number_field :amount, class: "form-control currency rate_calc", :required => true, :id => "amount" %>
               </span>
             </div>
             <div class="col-md-2 form-group">
-              (/) <%= f.label :rate%>
+              (x) <%= f.label :rate%>
               <%= f.number_field :rate, class: "form-control rate_calc", :id => "aud_lkr_rate" %>
             </div>
             <div class="col-md-2" >
@@ -31,7 +31,7 @@
             <div class="col-md-3 form-group">
               <%= f.label :"(=)"%>
               <span class="input-group">
-              <span class="input-group-addon">AU $</span><%= f.text_field :amount, class: "form-control currency",:readonly => true, :id => "amount_aud" %>
+              <span class="input-group-addon">Rs</span><%= f.text_field :amount_lkr, class: "form-control currency",:readonly => true, :id => "amount_lkr" %>
             </span>
             </div>
           </div>
@@ -74,7 +74,7 @@
       </div>
       <div class="col-md-2 form-group">
         <%= f.label :effective_months %><br>
-        <%= f.number_field :effective_months, class: "form-control" %>
+        <%= f.text_field :effective_months, class: "form-control" %>
       </div>
       <div class="col-md-8 form-group">
         <%= f.label :notes %><br>
@@ -85,37 +85,6 @@
     <div class="actions">
       <%= f.submit class: "btn btn-primary"%>
     </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading"><h4>Pending payments <span class="text-danger"> - Total: Rs <%= number_with_delimiter(@bulk_transaction.eligible_payments.map { |h| h['amount']}.sum, :demimiter => ',') %> </span>  </h4></div>
-      <div class="panel-body">
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th>Scholarship</th>
-            <th>Start date</th>
-            <th>Student</th>
-            <th>Year - Month</th>
-            <th>Status</th>
-            <th>Amount (Rs.)</th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @bulk_transaction.eligible_payments.each do |payment| %>
-            <tr>
-              <td><%= payment['schol_id']%></td>
-              <td><%= payment['schol_start']%></td>
-              <td><%= payment['student_full_name']%></td>
-              <td><%= payment['year']%> - <%= payment['month']%></td>
-              <td><%= payment['status']%></td>
-              <td><%= payment['amount']%></td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
 
   </div>
 

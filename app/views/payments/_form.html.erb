@@ -10,7 +10,67 @@
       </ul>
     </div>
   <% end %>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 form-group">
+        <%= f.label :from_account %>
+        <%= f.text_field :from_account, :required => true, class: "form-control" %>
+      </div>
+      <div class="col-md-3 form-group">
+        <%= f.label :to_account %>
+        <%= f.text_field :to_account, :required => true, class: "form-control" %>
+      </div>
+      <div class="col-md-5 form-group">
+        <%= f.label :external_ref %>
+        <%= f.text_field :external_ref, :required => true, class: "form-control" %>
+      </div>
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-md-5 form-group">
+        <%= f.label :notes %>
+        <%= f.text_area :notes, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Pending payments </h4></div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th></th>
+            <th>Student</th>
+            <th>Year - Month</th>
+            <th>Scholarship</th>
+            <th>Start date</th>
+            <th>Status</th>
+            <th>Amount (Rs.)</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% Payment.eligible_payments.each do |payment| %>
+            <tr>
+              <td><%=f.check_box :month, class: "checkbox", :id => "#{payment['year']}-#{payment['month']}"  %></td>
+              <td><%= payment['student_full_name']%></td>
+              <td><%= payment['year']%>-<%= payment['month']%></td>
+              <td><%= payment['schol_id']%></td>
+              <td><%= payment['schol_start']%></td>
+              <td><%= payment['status']%></td>
+              <td><%= payment['amount']%></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit class: "btn btn-primary"%>
+    </div>
   </div>
+
+
 <% end %>

@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Payments</h1>
+<h1>Past Payments</h1>
 
 <table class="table table-striped">
   <thead>
   <tr>
     <th>Student</th>
-    <th>For Scholarship</th>
+    <th>Scholarship</th>
+    <th>Payment</th>
     <th>Amount (Rs)</th>
     <th>From Acc.</th>
     <th>To Acc.</th>
@@ -20,6 +21,7 @@
       <tr>
         <td><%= payment.student.full_name %></td>
         <td><%= payment.scholarship.id %></td>
+        <td><%= payment.year %> - <%= payment.month %></td>
         <td><%= payment.amount %></td>
         <td><%= payment.from_account %></td>
         <td><%= payment.to_account %></td>
@@ -35,4 +37,4 @@
 
 <br>
 
-<!--<%= link_to 'New Payment', new_payment_path, class: "btn btn-primary"  %>-->
+<%= link_to 'Add new payments', new_payment_path, class: "btn btn-primary"  %>
