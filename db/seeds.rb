@@ -35,7 +35,7 @@ Donation.create(sponsor_id:1,
                  created_at:Time.now.to_datetime,
                  updated_at:Time.now.to_datetime)
 
-bulk_tx = BulkTransaction.create(settled_date:Date.today,
+BulkTransaction.create(settled_date:Date.today,
                        sender: Faker::Name.first_name,
                        amount: 100,
                        amount_lkr: 10000,
@@ -52,14 +52,10 @@ bulk_tx = BulkTransaction.create(settled_date:Date.today,
 (20162 .. 20164).each do |i|
   Payment.create(student_id:1,
                  scholarship_id:1,
-                 year: nil,
                  month:i,
                  amount:2500,
-                 from_account:Faker::Number.number(10),
                  to_account:Faker::Number.number(10),
-                 external_ref: Faker::Lorem.characters(10),
                  notes: Faker::Lorem.sentence,
-                 bulk_transactions_id:bulk_tx.id,
                  created_at:Time.now.to_datetime,
                  updated_at:Time.now.to_datetime)
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160515082846) do
+ActiveRecord::Schema.define(version: 20160518125503) do
 
   create_table "bulk_transactions", force: :cascade do |t|
     t.date     "settled_date"
@@ -44,21 +44,16 @@ ActiveRecord::Schema.define(version: 20160515082846) do
   add_index "donations", ["sponsor_id"], name: "index_donations_on_sponsor_id", using: :btree
 
   create_table "payments", force: :cascade do |t|
-    t.integer  "student_id",           limit: 4
-    t.integer  "scholarship_id",       limit: 4
-    t.decimal  "amount",                             precision: 10
-    t.string   "from_account",         limit: 255
-    t.string   "to_account",           limit: 255
-    t.string   "external_ref",         limit: 255
-    t.text     "notes",                limit: 65535
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.integer  "bulk_transactions_id", limit: 4
-    t.integer  "month",                limit: 4
-    t.integer  "year",                 limit: 4
+    t.integer  "student_id",     limit: 4
+    t.integer  "scholarship_id", limit: 4
+    t.decimal  "amount",                       precision: 10
+    t.string   "to_account",     limit: 255
+    t.text     "notes",          limit: 65535
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.integer  "month",          limit: 4
   end
 
-  add_index "payments", ["bulk_transactions_id"], name: "index_payments_on_bulk_transactions_id", using: :btree
   add_index "payments", ["scholarship_id"], name: "index_payments_on_scholarship_id", using: :btree
   add_index "payments", ["student_id"], name: "index_payments_on_student_id", using: :btree
 

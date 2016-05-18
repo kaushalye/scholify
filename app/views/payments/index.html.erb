@@ -12,7 +12,6 @@
         <th>Student</th>
         <th>Year - Payment</th>
         <th>Scholarship Id</th>
-        <th>Status</th>
         <th>Amount (Rs.)</th>
       </tr>
       </thead>
@@ -22,8 +21,7 @@
           <td><input type="checkbox" class="payment_check" checked name="f_month" value="<%= payment.scholarship.id %>.<%= payment.month %>"/></td>
           <td><%= payment.scholarship.student.full_name %></td>
           <td><%= payment.month / 10 %>-<%= payment.month % 10 %></td>
-          <td><%= payment.scholarship.id %> </td>
-          <td><%= payment.scholarship.status %></td>
+          <td><%= payment.scholarship.id %> - <%= payment.scholarship.status %></td>
           <td><%= payment.scholarship.amount %></td>
         </tr>
       <% end %>
@@ -50,13 +48,10 @@
       <thead>
       <tr>
         <th>Student</th>
+        <th>Year - Payment</th>
         <th>Scholarship</th>
-        <th>Payment</th>
         <th>Amount (Rs)</th>
-        <th>From Acc.</th>
         <th>To Acc.</th>
-        <th>External Ref.</th>
-        <th>Notes</th>
       </tr>
       </thead>
 
@@ -65,13 +60,10 @@
       <% @payments.each do |payment| %>
         <tr>
           <td><%= payment.student.full_name %></td>
-          <td><%= payment.scholarship.id %></td>
           <td><%= payment.month / 10 %> - <%= payment.month % 10 %></td>
+          <td><%= payment.scholarship.id %></td>
           <td><%= payment.amount %></td>
-          <td><%= payment.from_account %></td>
           <td><%= payment.to_account %></td>
-          <td><%= payment.external_ref %></td>
-          <td><%= payment.notes %></td>
           <!--<td><%= link_to '', payment, method: :delete, data: { confirm: 'Are you sure?' }, class: "  glyphicon glyphicon-remove" %></td>-->
         </tr>
       <% end %>
