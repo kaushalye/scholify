@@ -13,7 +13,6 @@ class Payment < ActiveRecord::Base
   def self.eligible_payments
     payments = []
     schols = Scholarship.eligible_all
-
     schols.each do |schol|
       payment_index = "#{schol.start_date.year}#{schol.start_date.month}".to_i - 1
       last_payment = Payment.last_payment(schol.id)
@@ -33,6 +32,7 @@ class Payment < ActiveRecord::Base
         payments.push payment
       end
     end
+    
     payments
   end
 

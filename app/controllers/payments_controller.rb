@@ -45,9 +45,6 @@ class PaymentsController < ApplicationController
       @payment.month = p[1]
       @payment.amount = @payment.scholarship.amount
       @payment.student_id = @payment.scholarship.student.id
-      @payment.from_account = 123456
-      @payment.to_account = 67890
-      @payment.external_ref = "some external ref"
 
       @payment.save
     end

@@ -13,7 +13,6 @@ $(document).ready ->
       url: "/multi_payments",
       data: { selectedPayments: checkedValues },
       success:(data) ->
-        alert data.id
         return false
       error:(data) ->
         return false

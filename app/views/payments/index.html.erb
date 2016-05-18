@@ -1,37 +1,38 @@
 <p id="notice"><%= notice %></p>
 
 
+
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Pending payments </h4></div>
   <div class="panel-body">
     <% if Payment.eligible_payments.size > 0 %>
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th></th>
-        <th>Student</th>
-        <th>Year - Payment</th>
-        <th>Scholarship Id</th>
-        <th>Amount (Rs.)</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% Payment.eligible_payments.each do |payment| %>
+      <table class="table table-striped">
+        <thead>
         <tr>
-          <td><input type="checkbox" class="payment_check" checked name="f_month" value="<%= payment.scholarship.id %>.<%= payment.month %>"/></td>
-          <td><%= payment.scholarship.student.full_name %></td>
-          <td><%= payment.month / 10 %>-<%= payment.month % 10 %></td>
-          <td><%= payment.scholarship.id %> - <%= payment.scholarship.status %></td>
-          <td><%= payment.scholarship.amount %></td>
+          <th>Student</th>
+          <% Payment.eligible_payments.map{ |p| p.month}.uniq.sort.each do |month| %>
+            <th> <%= month / 10 %>-<%= month % 10 + 1 %></td> </th>
+          <% end %>
         </tr>
-      <% end %>
-      </tbody>
-      <tfoot>
-      <tr>
-        <td colspan="6"><button type="button" id="payments_save" class= "btn btn-primary">Save selected</button></td>
-      </tr>
-      </tfoot>
-    </table>
+        </thead>
+        <tbody>
+        <% Payment.eligible_payments.map{ |p| p.scholarship}.uniq.each do |schol| %>
+          <tr>
+            <td><%= schol.student.full_name %></td>
+            <% Payment.eligible_payments.map{ |p| p.month}.uniq.sort.each do |month| %>
+              <% if Payment.eligible_payments.any? {|x| x.month == month && x.scholarship.id == schol.id} %>
+                <td><input type="checkbox" class="payment_check" checked name="f_month" value="<%= schol.id  %>.<%= month %>"/></td>
+              <% else %>
+                <td></td>
+              <% end %>
+
+            <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+
+      </table>
+      <button type="button" id="payments_save" class= "btn btn-primary">Save selected</button>
     <% else %>
       <span>You do not have any pending payments</span>
     <% end %>
@@ -43,7 +44,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Past payments </h4></div>
-  <div class="panel-body">
+  <div class="panel-body fixed-panel">
     <table class="table table-striped">
       <thead>
       <tr>
@@ -60,7 +61,7 @@
       <% @payments.each do |payment| %>
         <tr>
           <td><%= payment.student.full_name %></td>
-          <td><%= payment.month / 10 %> - <%= payment.month % 10 %></td>
+          <td><%= payment.month / 10 %>-<%= payment.month % 10 + 1%></td>
           <td><%= payment.scholarship.id %></td>
           <td><%= payment.amount %></td>
           <td><%= payment.to_account %></td>
