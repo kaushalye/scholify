@@ -32,7 +32,7 @@ class Payment < ActiveRecord::Base
         payments.push payment
       end
     end
-    
+
     payments
   end
 

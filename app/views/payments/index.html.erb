@@ -9,6 +9,7 @@
       <table class="table table-striped">
         <thead>
         <tr>
+          <th>Rs</th>
           <th>Student</th>
           <% Payment.eligible_payments.map{ |p| p.month}.uniq.sort.each do |month| %>
             <th> <%= month / 10 %>-<%= month % 10 + 1 %></td> </th>
@@ -18,7 +19,8 @@
         <tbody>
         <% Payment.eligible_payments.map{ |p| p.scholarship}.uniq.each do |schol| %>
           <tr>
-            <td><%= schol.student.full_name %></td>
+            <td><%= schol.amount  %></td>
+            <td><%= schol.student.full_name %> </td>
             <% Payment.eligible_payments.map{ |p| p.month}.uniq.sort.each do |month| %>
               <% if Payment.eligible_payments.any? {|x| x.month == month && x.scholarship.id == schol.id} %>
                 <td><input type="checkbox" class="payment_check" checked name="f_month" value="<%= schol.id  %>.<%= month %>"/></td>
