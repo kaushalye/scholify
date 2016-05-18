@@ -37,6 +37,22 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def multi_payments
+    params['selectedPayments'].each do |payment|
+      p = payment.split(".")
+      @payment = Payment.new
+      @payment.scholarship = Scholarship.find_by_id(p[0])
+      @payment.month = p[1]
+      @payment.amount = @payment.scholarship.amount
+      @payment.student_id = @payment.scholarship.student.id
+      @payment.from_account = 123456
+      @payment.to_account = 67890
+      @payment.external_ref = "some external ref"
+
+      @payment.save
+    end
+    redirect_to @payment
+  end
   # PATCH/PUT /payments/1
   # PATCH/PUT /payments/1.json
   def update

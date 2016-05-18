@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'sessions#create'
 
+  post '/multi_payments', to: "payments#multi_payments"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

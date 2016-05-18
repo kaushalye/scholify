@@ -27,15 +27,9 @@ class Payment < ActiveRecord::Base
       payment_index_up_to = "#{payments_up_to.year}#{payments_up_to.month}".to_i - 1
       #insert the eliegible payment
       (payment_index .. payment_index_up_to ).each do |i|
-        payment = {
-          'schol_id' => schol.id,
-          'schol_start' => schol.start_date,
-          'schol_end' => schol.end_date,
-          'status' => schol.status,
-          'student_full_name' => schol.student.full_name,
-          'amount' => schol.amount,
-          'month' => i
-        }
+        payment = Payment.new
+        payment.scholarship = schol
+        payment.month = i
         payments.push payment
       end
     end

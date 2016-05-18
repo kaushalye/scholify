@@ -36,39 +36,40 @@
       </div>
     </div>
 
-    <div class="panel panel-default">
-      <div class="panel-heading"><h4>Pending payments </h4></div>
-      <div class="panel-body">
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th></th>
-            <th>Student</th>
-            <th>Year - Month</th>
-            <th>Scholarship</th>
-            <th>Status</th>
-            <th>Amount (Rs.)</th>
-          </tr>
-          </thead>
-          <tbody>
-          <% Payment.eligible_payments.each do |payment| %>
-            <tr>
-              <td><%=f.check_box :month,  checked: true, :id => "#{payment['month']}"  %></td>
-              <td><%= payment['student_full_name']%></td>
-              <td><%= payment['month'] / 10 %>-<%= payment['month'] % 10%></td>
-              <td><%= payment['schol_id']%> (<%= payment['schol_start']%> - <%= payment['schol_end']%>)</td>
-              <td><%= payment['status']%></td>
-              <td><%= payment['amount']%></td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
+      <div class="panel panel-default">
+        <div class="panel-heading"><h4>Pending payments </h4></div>
+        <div class="panel-body">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th></th>
+                <th>Student</th>
+                <th>Year - Month</th>
+                <th>Scholarship</th>
+                <th>Status</th>
+                <th>Amount (Rs.)</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% Payment.eligible_payments.each do |payment| %>
+                <tr>
+                  <td><%=check_box_tag :month,  checked: true, :id => "#{payment['month']}"  %></td>
+                  <td></td>
+                  <td><%= payment.month / 10 %>-<%= payment.month % 10%></td>
+                  <td><%= payment.scholarship.id %> </td>
+                  <td><%= payment.scholarship.status%></td>
+                  <td><%= payment.scholarship.amount%></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+
+        </div>
+      </div>
+      <div class="actions">
+        <%= f.submit class: "btn btn-primary"%>
       </div>
     </div>
-    <div class="actions">
-      <%= f.submit class: "btn btn-primary"%>
-    </div>
-  </div>
 
 
 <% end %>
