@@ -50,8 +50,8 @@
         <tr>
           <td><%= payment.id %></td>
           <td><%= payment.amount %></td>
-          <td><%= payment.year %></td>
-          <td><%= payment.month %></td>
+          <td><%= payment.month / 10 %></td>
+          <td><%= payment.month % 10 + 1%></td>
         </tr>
       <% end %>
       </tbody>

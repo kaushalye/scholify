@@ -12,7 +12,7 @@
           <th>Rs</th>
           <th>Student</th>
           <% Payment.eligible_payments.map{ |p| p.month}.uniq.sort.each do |month| %>
-            <th> <%= month / 10 %>-<%= month % 10 + 1 %></td> </th>
+            <th><%= Payment.format_year_month month %></th>
           <% end %>
         </tr>
         </thead>
@@ -63,7 +63,7 @@
       <% @payments.each do |payment| %>
         <tr>
           <td><%= payment.student.full_name %></td>
-          <td><%= payment.month / 10 %>-<%= payment.month % 10 + 1%></td>
+          <td><%= Payment.format_year_month payment.month %></td>
           <td><%= payment.scholarship.id %></td>
           <td><%= payment.amount %></td>
           <td><%= payment.to_account %></td>

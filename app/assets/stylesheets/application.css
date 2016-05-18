@@ -49,3 +49,9 @@ body {
     margin: 20px 0;
     text-align: right;
 }
+.highlight{
+    color: red;
+}
+.righty{
+    text-align: right;
+}

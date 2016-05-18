@@ -19,7 +19,7 @@ class Scholarship < ActiveRecord::Base
   end
 
   def format_payment payment
-    "#{payment.year} - #{payment.month}"
+    Payment.format_year_month payment.month
   end
 
   def past_payments

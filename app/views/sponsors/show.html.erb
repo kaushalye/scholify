@@ -3,14 +3,18 @@
 <h1><%= @sponsor.title %>. <%= @sponsor.first_name %>  <%= @sponsor.last_name %></h1>
 <p> <small>E:  <%= @sponsor.email %> <br/> T:  <%= @sponsor.phone %></small></p>
 
+<div class="righty">
+  <p>Total value of scholarships:<span class="highlight"> Rs. <%= number_with_delimiter(@sponsor.total_scholarship_amount, :delimiter => ',') %></span></p>
+  <p>Total donations:<span class="highlight"> $ <%= number_with_delimiter(@sponsor.total_donations, :delimiter => ',') %></span></p>
+</div>
 <div class="panel panel-default">
-  <div class="panel-heading"><h4>Currently sponsoring</h4></div>
+  <div class="panel-heading"><h4>Currently sponsoring</h4> </div>
   <div class="panel-body">
     <table class="table table-striped">
       <thead>
       <tr>
         <th>Student</th>
-        <th>Scholarship id</th>
+        <th>Amount(Rs.)</th>
         <th>Start date</th>
         <th>End date</th>
         <th>State</th>
@@ -20,7 +24,7 @@
       <% @sponsor.scholarships.each do |schol| %>
         <tr>
           <td><%= link_to schol.student do%>  <%= schol.student.full_name %> <% end %></td>
-          <td><%= link_to schol do%>  <%= schol.id %> <% end %></td>
+          <td><%= link_to schol do%>  <%= schol.amount %> <% end %></td>
           <td><%= schol.start_date %></td>
           <td><%= schol.end_date %></td>
           <td><%= schol.status %></td>
@@ -40,7 +44,7 @@
       <thead>
       <tr>
         <th>Donation id</th>
-        <th>Amount </th>
+        <th>Amount($) </th>
         <th>Valid from</th>
         <th>Num of months</th>
         <th>Scholarship</th>

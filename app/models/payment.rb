@@ -10,6 +10,10 @@ class Payment < ActiveRecord::Base
     for_scholarship(schol_id).order(:id).last
   end
 
+  def self.format_year_month month
+    "#{month / 10}-#{month % 10 + 1}"
+  end
+
   def self.eligible_payments
     payments = []
     schols = Scholarship.eligible_all
