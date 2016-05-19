@@ -11,16 +11,18 @@
         <tr>
           <th>Rs</th>
           <th>Student</th>
+          <th>Schol Start</th>
           <% Payment.eligible_payments.map{ |p| p.month}.uniq.sort.each do |month| %>
             <th><%= Payment.format_year_month month %></th>
           <% end %>
         </tr>
         </thead>
         <tbody>
-        <% Payment.eligible_payments.map{ |p| p.scholarship}.uniq.each do |schol| %>
+        <% Payment.eligible_payments.map{ |p| p.scholarship}.uniq.sort_by!{|s| s.start_date}.each do |schol| %>
           <tr>
             <td><%= schol.amount  %></td>
-            <td><%= schol.student.full_name %> </td>
+            <td><%= schol.student.id %>.<%= schol.student.full_name %> </td>
+            <td><%= schol.start_date  %></td>
             <% Payment.eligible_payments.map{ |p| p.month}.uniq.sort.each do |month| %>
               <% if Payment.eligible_payments.any? {|x| x.month == month && x.scholarship.id == schol.id} %>
                 <td><input type="checkbox" class="payment_check" checked name="f_month" value="<%= schol.id  %>.<%= month %>"/></td>
@@ -62,7 +64,7 @@
       <tbody>
       <% @payments.each do |payment| %>
         <tr>
-          <td><%= payment.student.full_name %></td>
+          <td><%= payment.student.id %>.<%= payment.student.full_name %></td>
           <td><%= Payment.format_year_month payment.month %></td>
           <td><%= payment.scholarship.id %></td>
           <td><%= payment.amount %></td>

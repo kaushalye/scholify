@@ -49,14 +49,14 @@ BulkTransaction.create(settled_date:Date.today,
                        effective_months: 3
                 )
 #add two payments for student 1
-(20162 .. 20164).each do |i|
-  Payment.create(student_id:1,
-                 scholarship_id:1,
-                 month:i,
-                 amount:2500,
-                 to_account:Faker::Number.number(10),
-                 notes: Faker::Lorem.sentence,
-                 created_at:Time.now.to_datetime,
-                 updated_at:Time.now.to_datetime)
-
-end
+# (20162 .. 20164).each do |i|
+#   Payment.create(student_id:1,
+#                  scholarship_id:1,
+#                  month:i,
+#                  amount:2500,
+#                  to_account:Faker::Number.number(10),
+#                  notes: Faker::Lorem.sentence,
+#                  created_at:Time.now.to_datetime,
+#                  updated_at:Time.now.to_datetime)
+#
+# end
