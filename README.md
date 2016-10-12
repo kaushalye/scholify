@@ -23,3 +23,8 @@ A free and open source application developed to manage scholarship fundings
 
 ## How to deploy to heroku
 - https://scholify.herokuapp.com 
+
+## How to setup google oath
+- Go to https://console.developers.google.com/iam-admin/projects
+- Go to credentials
+- Select project scholify

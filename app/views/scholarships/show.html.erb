@@ -30,9 +30,12 @@
     <br/>
   </div>
 </div>
-<div class="text-info">
-  Last payment received for <%= @scholarship.format_payment(@scholarship.last_payment) %>
-</div>
+<% if @scholarship.last_payment %>
+  <div class="text-info">
+    Last payment received for <%= @scholarship.format_payment(@scholarship.last_payment) %>
+  </div>
+<% end %>
+
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Past Payments</h4></div>
   <div class="panel-body">
