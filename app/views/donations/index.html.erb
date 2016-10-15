@@ -5,6 +5,7 @@
 <table class="table table-striped">
   <thead>
   <tr>
+  	<th>Bank Date</th>
     <th>Amount($)</th>
     <th>Valid from</th>
     <th>Num of months</th>
@@ -15,14 +16,15 @@
   <tbody>
     <% @donations.each do |donation| %>
       <tr>
+      	<td><%= donation.bank_date %></td>
         <td><%= donation.amount %></td>
         <td><%= donation.valid_from %></td>
         <td><%= donation.num_of_months %></td>
         <td><%= donation.sponsor.full_name %></td>
         <td><%= donation.scholarship.id %></td>
-        <td><%= link_to '', donation, class: "btn btn-info glyphicon glyphicon-info-sign"%></td>
-        <td><%= link_to '', edit_donation_path(donation), class: "btn btn-warning glyphicon glyphicon-edit" %></td>
-        <td><%= link_to '', donation, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger glyphicon glyphicon-remove" %></td>
+        <td><%= link_to 'View', donation, class: "btn btn-info glyphicon glyphicon-info-sign"%></td>
+        <td><%= link_to 'Edit', edit_donation_path(donation), class: "btn btn-warning glyphicon glyphicon-edit" %></td>
+        <td><%= link_to 'Delete', donation, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger glyphicon glyphicon-remove" %></td>
       </tr>
     <% end %>
   </tbody>

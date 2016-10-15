@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Bulk Transactions</h1>
-
+<%= link_to 'New Bulk transaction', new_bulk_transaction_path, class: "btn btn-primary" %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -36,9 +36,9 @@
         <td><%= bulk_transaction.notes %></td>
         <td><%= bulk_transaction.effective_year %></td>
         <td><%= bulk_transaction.effective_months %></td>
-        <td><%= link_to '', bulk_transaction, class: "btn btn-info glyphicon glyphicon-info-sign" %></td>
-        <td><%= link_to '', edit_bulk_transaction_path(bulk_transaction), class: "btn btn-warning glyphicon glyphicon-edit" %></td>
-        <td><%= link_to '', bulk_transaction, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger glyphicon glyphicon-remove" %></td>
+        <td><%= link_to 'View', bulk_transaction, class: "btn btn-info glyphicon glyphicon-info-sign" %></td>
+        <td><%= link_to 'Edit', edit_bulk_transaction_path(bulk_transaction), class: "btn btn-warning glyphicon glyphicon-edit" %></td>
+        <td><%= link_to 'Delete', bulk_transaction, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger glyphicon glyphicon-remove" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -46,4 +46,4 @@
 
 <br>
 
-<%= link_to 'New Bulk transaction', new_bulk_transaction_path, class: "btn btn-primary" %>
+

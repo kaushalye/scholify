@@ -46,6 +46,7 @@ group :development, :test do
   gem 'faker'
   # Use mysql as the database for Active Record
   gem 'mysql2', '~> 0.3.18'
+  gem 'sqlite3'
 end
 
 group :development do
@@ -60,4 +61,4 @@ end
 #   gem 'pg', '0.15.1'
 # end
 
-ruby "2.2.1"
+ruby "2.3.1"

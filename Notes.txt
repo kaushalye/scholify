@@ -1,0 +1,68 @@
+https://github.com/kaushalye/scholify 
+
+
+I created this trello board to capture the future improvements.
+https://trello.com/b/Gy2WL9D0/scholify
+
+If you are new to trello, click on the invitation link to gain acsess. 
+https://trello.com/invite/b/Gy2WL9D0/baa5a7e334b7afe00cea4e476c973942/scholify
+This will be the source of truth. 
+
+Add your concerns as a card under the backlog column.
+Then anyone can pick a card and do it when they have time. It also captures the history.
+
+Yey! we are going agile. ;-)
+
+
+Hi Indika,
+In the root directory​ of the project,​ issue the command
+rake db:create
+This will create a new database with sample data.​ No need to dump and import.
+The schema and seeds are under the directory db if you want to further investigate.
+Let me know how you go.
+​
+
+
+Hi Kaw,
+
+Have fixed the db problem and was able to proceed. But i think you need to send us some environment variables and was waiting until u return to Melbourne :)..
+
+Here is what I've done.
+
+1) was complaining about secret_key_base. Have added the following line to development.rb and set the environment variable.
+config.secret_key_base = ENV["SECRET_KEY_BASE"]
+export SECRET_KEY_BASE=GENERATED_CODE
+
+2) Change the database to sqlite3 in database.yml and rake db:create. fixed the db problem.
+3) omini auth fails. i think we need to set GOOGLE_CLIENT_ID environment variable.
+
+There was also a problem with bootstrap, but i temporarily disabled bootstrap functionality.
+
+Cheers,
+Indika
+
+
+Oh Yes.
+Totally forgot to send those, but hey, you should've asked me earlier. :-)
+Here are the secrets for the app. 
+DO NOT share these with anyone or commit to github. Simply export the variables to your terminal when you run the server. 
+in env.sh
+
+Why do you want to switch to sqlite? Use mysql as I've configured. That's what we need to use in production. Usually sqlite is for testing/demo.
+
+
+NOTES::
+Disable bootstrap : remove line from app/assets/stylesheets/application.js
+ *= require bootstrap/dist/css/bootstrap 
+
+environment variables
+source env.sh
+
+rails g migration add_bulk_transaction_to_payment bulk_transaction:references 
+rails g migration add_amount_aud_to_payment amount_lkr:decimal  effective_year:integer effective_month:integer
+
+rails g migration remove_month_from_payment month:integer
+rails g migration remove_student_id_from_payment student:reference
+
+rails g migration alter_effective_month_table_payment effective_month:string
+

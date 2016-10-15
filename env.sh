@@ -1,0 +1,4 @@
+export SECRET_KEY_BASE=GENERATED_CODE
+export GOOGLE_CLIENT_ID=826847929665-jfvoojiej98mhkftsm6jb371lbkur2hr.apps.googleusercontent.com
+export GOOGLE_SECRET=92r0Igeqsa1nrBVjz1GvD-jA
+
