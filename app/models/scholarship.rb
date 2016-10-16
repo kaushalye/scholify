@@ -10,12 +10,20 @@ class Scholarship < ActiveRecord::Base
   STATUSES = ['ACTIVE', 'INACTIVE']
   NUM_OF_SCHOLS_PER_YEAR = 10
 
+ 
+  
   def to_str
-    student.full_name
+    sponsor.full_name + "#" + student.full_name
   end
 
+  def self.active_at check_date
+      #where("status = :status AND end_date >= :when AND start_date < :when", {status: "ACTIVE", when: Date.today})
+      where("end_date >= :date", {date: check_date.strftime("%Y%m%d")})
+  end
+  
   def self.eligible_all
-    where("status = :status AND end_date > :when AND start_date < :when", {status: "ACTIVE", when: Date.today})
+    #where("status = :status AND end_date >= :when AND start_date < :when", {status: "ACTIVE", when: Date.today})
+    where("end_date >= :date", {date: Date.today.strftime("%Y%m%d")})
   end
 
   def format_payment payment

@@ -11,101 +11,109 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518125503) do
+ActiveRecord::Schema.define(version: 20161012121855) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "bulk_transactions", force: :cascade do |t|
     t.date     "settled_date"
-    t.string   "sender",           limit: 255
-    t.decimal  "amount",                         precision: 10
-    t.decimal  "amount_lkr",                     precision: 10
-    t.decimal  "rate",                           precision: 10
+    t.string   "sender"
+    t.decimal  "amount"
+    t.decimal  "amount_lkr"
+    t.decimal  "rate"
     t.date     "bank_date"
-    t.string   "chq_no",           limit: 255
-    t.string   "bank_acc",         limit: 255
-    t.string   "beneficiary",      limit: 255
-    t.text     "notes",            limit: 65535
-    t.integer  "effective_year",   limit: 4
-    t.integer  "effective_months", limit: 4
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.string   "chq_no"
+    t.string   "bank_acc"
+    t.string   "beneficiary"
+    t.text     "notes"
+    t.integer  "effective_year"
+    t.integer  "effective_months"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "donations", force: :cascade do |t|
-    t.integer  "sponsor_id",     limit: 4
-    t.integer  "scholarship_id", limit: 4
-    t.decimal  "amount",                   precision: 10
+    t.integer  "sponsor_id"
+    t.integer  "scholarship_id"
+    t.decimal  "amount"
     t.date     "valid_from"
-    t.integer  "num_of_months",  limit: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.integer  "num_of_months"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.date     "bank_date"
+    t.string   "account"
   end
 
   add_index "donations", ["scholarship_id"], name: "index_donations_on_scholarship_id", using: :btree
   add_index "donations", ["sponsor_id"], name: "index_donations_on_sponsor_id", using: :btree
 
   create_table "payments", force: :cascade do |t|
-    t.integer  "student_id",     limit: 4
-    t.integer  "scholarship_id", limit: 4
-    t.decimal  "amount",                       precision: 10
-    t.string   "to_account",     limit: 255
-    t.text     "notes",          limit: 65535
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.integer  "month",          limit: 4
+    t.integer  "scholarship_id"
+    t.decimal  "amount"
+    t.string   "to_account"
+    t.text     "notes"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "bulk_transaction_id"
+    t.decimal  "amount_lkr"
+    t.integer  "effective_year"
+    t.string   "effective_month"
   end
 
+  add_index "payments", ["bulk_transaction_id"], name: "index_payments_on_bulk_transaction_id", using: :btree
   add_index "payments", ["scholarship_id"], name: "index_payments_on_scholarship_id", using: :btree
-  add_index "payments", ["student_id"], name: "index_payments_on_student_id", using: :btree
 
   create_table "scholarships", force: :cascade do |t|
-    t.decimal  "amount",                 precision: 10
+    t.decimal  "amount"
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "status",     limit: 255
-    t.integer  "sponsor_id", limit: 4
-    t.integer  "student_id", limit: 4
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.string   "status"
+    t.integer  "sponsor_id"
+    t.integer  "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "scholarships", ["sponsor_id"], name: "index_scholarships_on_sponsor_id", using: :btree
   add_index "scholarships", ["student_id"], name: "index_scholarships_on_student_id", using: :btree
 
   create_table "sponsors", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.string   "first_name", limit: 255
-    t.string   "last_name",  limit: 255
-    t.string   "email",      limit: 255
-    t.string   "phone",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "title"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "students", force: :cascade do |t|
-    t.string   "first_name", limit: 255
-    t.string   "last_name",  limit: 255
-    t.string   "email",      limit: 255
-    t.string   "phone",      limit: 255
-    t.text     "address",    limit: 65535
-    t.string   "faculty",    limit: 255
-    t.string   "department", limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.text     "address"
+    t.string   "faculty"
+    t.string   "department"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider",   limit: 255, null: false
-    t.string   "uid",        limit: 255, null: false
-    t.string   "name",       limit: 255
-    t.string   "location",   limit: 255
-    t.string   "image_url",  limit: 255
-    t.string   "url",        limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "provider",   null: false
+    t.string   "uid",        null: false
+    t.string   "name"
+    t.string   "location"
+    t.string   "image_url"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
   add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
+  add_foreign_key "payments", "bulk_transactions"
 end

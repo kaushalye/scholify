@@ -2,4 +2,35 @@
 
 <%= render 'form' %>
 
+<h1>Scholarships</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Scholarship Amount(Rs.)</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Status</th>
+      <th>Student</th>
+      <th>Sponsor</th>
+      <th>Amount Paid (Rs.)</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wrappers.each do |wrapper| %>
+    	<% scholarship = wrapper.get_scholarship %>
+      <tr>
+        <td><%= scholarship.amount %></td>
+        <td><%= scholarship.start_date %></td>
+        <td><%= scholarship.end_date %></td>
+        <td><%= scholarship.status %></td>
+        <td><%= scholarship.student.full_name %></td>
+        <td><%= scholarship.sponsor.full_name %></td>
+        <td><%= wrapper.get_amount %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
 <%= link_to 'Back', bulk_transactions_path %>

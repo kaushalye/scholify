@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <%= link_to 'Back', sponsors_path %>
-<h1><%= @sponsor.title %>. <%= @sponsor.first_name %>  <%= @sponsor.last_name %></h1>
+<h1><%= @sponsor.title %> <%= @sponsor.first_name %>  <%= @sponsor.last_name %></h1>
 <p> <small>E:  <%= @sponsor.email %> <br/> T:  <%= @sponsor.phone %></small></p>
 
 <div class="righty">
@@ -43,6 +43,7 @@
     <table class="table table-striped">
       <thead>
       <tr>
+      	<th>Bank date</th>
         <th>Donation id</th>
         <th>Amount($) </th>
         <th>Valid from</th>
@@ -51,8 +52,9 @@
       </tr>
       </thead>
       <tbody>
-      <% @sponsor.donations.each do |donation| %>
+      <% @sponsor.donations.sort_by{|x| -x[:bank_date]}.each do |donation| %>
         <tr>
+          <td><%= donation.bank_date %></td>	
           <td><%= link_to donation do%>  <%= donation.id %> <% end %></td>
           <td><%= donation.amount %></td>
           <td><%= donation.valid_from %></td>

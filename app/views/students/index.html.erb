@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Students</h1>
-
+<%= link_to 'New Student', new_student_path, class: "btn btn-primary"  %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -24,9 +24,9 @@
         <td><%= student.address %></td>
         <td><%= student.faculty %></td>
         <td><%= student.department %></td>
-        <td><%= link_to '', student , class: "btn btn-info glyphicon glyphicon-info-sign" %></td>
-        <td><%= link_to '', edit_student_path(student), class: "btn btn-warning glyphicon glyphicon-edit" %></td>
-        <td><%= link_to '', student, method: :delete, data: { confirm: 'Are you sure?'} , class: "btn btn-danger glyphicon glyphicon-remove" %></td>
+        <td><%= link_to 'View', student , class: "btn btn-info glyphicon glyphicon-info-sign" %></td>
+        <td><%= link_to 'Edit', edit_student_path(student), class: "btn btn-warning glyphicon glyphicon-edit" %></td>
+        <td><%= link_to 'Delete', student, method: :delete, data: { confirm: 'Are you sure?'} , class: "btn btn-danger glyphicon glyphicon-remove" %></td>
       </tr>
     <% end %>
   </tbody>
