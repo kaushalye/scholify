@@ -23,7 +23,7 @@ class Payment < ActiveRecord::Base
       #This schol has a payment entry, start from next month
       #Otherwise use the start month of the scholarship
       if ( last_payment )
-        payment_index = last_payment.month + 1
+        payment_index = last_payment.effective_month.to_i + 1
       end
 
       payments_up_to = Date.today + 1.month
@@ -32,7 +32,7 @@ class Payment < ActiveRecord::Base
       (payment_index .. payment_index_up_to ).each do |i|
         payment = Payment.new
         payment.scholarship = schol
-        payment.month = i
+        payment.effective_month = i
         payments.push payment
       end
     end

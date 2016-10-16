@@ -18,6 +18,12 @@ class BulkTransactionsController < ApplicationController
     @bulk_transaction = BulkTransaction.new
     #@scholarships = Scholarship.eligible_all
     @scholarships = Scholarship.active_at(Date.new(2018,01,01))
+    @wrappers = []
+    @scholarships.each do |schol|
+       @wrappers.push Scholarship_Wrapper.new schol
+    end
+    
+      
   end
 
   # GET /bulk_transactions/1/edit

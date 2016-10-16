@@ -23,8 +23,8 @@
             <td><%= schol.amount  %></td>
             <td><%= schol.student.id %>.<%= schol.student.full_name %> </td>
             <td><%= schol.start_date  %></td>
-            <% Payment.eligible_payments.map{ |p| p.month}.uniq.sort.each do |month| %>
-              <% if Payment.eligible_payments.any? {|x| x.month == month && x.scholarship.id == schol.id} %>
+            <% Payment.eligible_payments.map{ |p| p.effective_month}.uniq.sort.each do |month| %>
+              <% if Payment.eligible_payments.any? {|x| x.effective_month == month && x.scholarship.id == schol.id} %>
                 <td><input type="checkbox" class="payment_check" checked name="f_month" value="<%= schol.id  %>.<%= month %>"/></td>
               <% else %>
                 <td></td>
