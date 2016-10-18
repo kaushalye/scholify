@@ -5,7 +5,7 @@
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Pending payments </h4></div>
   <div class="panel-body">
-    <% if Payment.eligible_payments.size > 0 %>
+    <% if Payment.eligible_payments.size >0 %>
       <table class="table table-striped">
         <thead>
         <tr>
@@ -66,7 +66,7 @@
       <tbody>
       <% @payments.each do |payment| %>
         <tr>
-          <td><%= payment.student.id %>.<%= payment.student.full_name %></td>
+          <td><%= payment.scholarship.student.id %>.<%= payment.scholarship.student.full_name %></td>
           <td><%= payment.effective_year %></td>
           <td><%= payment.effective_month %></td>
           <td><%= payment.scholarship.id %></td>
