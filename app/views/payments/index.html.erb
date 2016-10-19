@@ -56,8 +56,9 @@
         <th>Year</th>
         <th>Month</th>
         <th>Scholarship</th>
-        <th>Amount (Rs)</th>
         <th>Amount (AUD)</th>
+        <th>Amount (Rs)</th>
+        
         <th>To Acc.</th>
       </tr>
       </thead>
@@ -70,8 +71,8 @@
           <td><%= payment.effective_year %></td>
           <td><%= payment.effective_month %></td>
           <td><%= payment.scholarship.id %></td>
+          <td><%= number_to_currency(payment.amount_aud) %></td>
           <td><%= payment.amount %></td>
-          <td><%= number_to_currency(payment.amount_lkr) %></td>
           <td><%= payment.to_account %></td>
           <!--<td><%= link_to '', payment, method: :delete, data: { confirm: 'Are you sure?' }, class: "  glyphicon glyphicon-remove" %></td>-->
         </tr>
