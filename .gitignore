@@ -11,6 +11,6 @@
 /log/*
 !/log/.keep
 /tmp
-env.sh
+/env.sh
 .keep
 
