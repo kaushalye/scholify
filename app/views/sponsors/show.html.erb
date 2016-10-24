@@ -4,30 +4,34 @@
 <p> <small>E:  <%= @sponsor.email %> <br/> T:  <%= @sponsor.phone %></small></p>
 
 <div class="righty">
-  <p>Total value of scholarships:<span class="highlight"> Rs. <%= number_with_delimiter(@sponsor.total_scholarship_amount, :delimiter => ',') %></span></p>
-  <p>Total donations:<span class="highlight"> $ <%= number_with_delimiter(@sponsor.total_donations, :delimiter => ',') %></span></p>
+  <p>Total payments to your scholarships :<span class="highlight"> <%= number_to_currency(@sponsor.total_payments_lkr, unit: "Rs.", precision: 2) %></span></p>
+  <p>Total value of payments in AUD:<span class="highlight"> <%= number_to_currency(@sponsor.total_payments_aud, precision: 2) %></span></p>
+  
+  <p>Contributions made by you:<span class="highlight"> <%= number_to_currency(@sponsor.total_donations, precision: 2) %></span></p>
 </div>
 <div class="panel panel-default">
-  <div class="panel-heading"><h4>Sponsorships</h4> </div>
+  <div class="panel-heading"><h4>Your Sponsorships</h4> </div>
   <div class="panel-body">
     <table class="table table-striped">
       <thead>
-      <tr>
+       <tr>
         <th>Student</th>
-        <th>Amount(Rs.)</th>
         <th>Start date</th>
         <th>End date</th>
-        <th>State</th>
+        <th>Faculty</th>
+        <th>Amount (Rs.)</th>
+        <th>Status</th>
       </tr>
       </thead>
       <tbody>
-      <% @sponsor.scholarships.each do |schol| %>
+      <% @sponsor.scholarships.sort_by{|x| x.start_date}.reverse.each do |schol| %>
         <tr>
           <td><%= link_to schol.student do%>  <%= schol.student.full_name %> <% end %></td>
-          <td><%= link_to schol do%>  <%= schol.amount %> <% end %></td>
           <td><%= schol.start_date %></td>
           <td><%= schol.end_date %></td>
-          <td><%= schol.status %></td>
+          <td><%= schol.student.faculty %></td>
+          <td><%= link_to schol do%>  <%= number_to_currency(schol.amount , unit:"Rs.", precision: 2)%> <% end %></td>
+          <td><%= schol.get_status Date.today %></td>
         </tr>
       <% end %>
       </tbody>
@@ -37,36 +41,70 @@
 
 <br/>
 
+<% @sponsor.scholarships.sort_by{|x| x.start_date}.reverse.each do |schol| %>
 <div class="panel panel-default">
-  <div class="panel-heading"><h4>Past Donations</h4></div>
-  <div class="panel-body">
-    <table class="table table-striped">
+  <div class="panel-heading"><h4>Summary of sponsorship : <%= schol.student.full_name %></h4></div>
+  <% nextDonationDue = schol.get_next_donation_due_date %>
+  <% if (nextDonationDue < Date.today and nextDonationDue < schol.end_date ) %> 
+  	<h4><span class="hilight2">Contributions due from <%=nextDonationDue%></span></h4>
+  <% end %>
+   <% totalAUD=0 %>
+   <% totalLKR = 0 %>  
+  <table class="table table-striped">
       <thead>
+ 	  <tr><th class="table-section" colspan=3> Scholarship payments made to the student:</th></tr>
       <tr>
-      	<th>Bank date</th>
-        <th>Amount($) </th>
-        <th>Scholarship</th>
-        <th>Valid from</th>
-        <th>Num of months</th>
-        <th>Donation Id</th>
-	     </tr>
+        <th>Year</th>
+        <th>Amount (Rs.)</th>
+     	<th>Amount (AUD)</th>   
+      </tr>
       </thead>
+
       <tbody>
-      <% @sponsor.donations.sort_by{|x| x.bank_date}.reverse.each do |donation| %>
+      <% @pp = schol.payments.group(:effective_year).select('effective_year, sum(amount) as lkr, sum(amount_aud) as aud')%>
+
+       <% @pp.sort_by{|x| x.effective_year}.each do |p| %>
         <tr>
-          <td><%= donation.bank_date %></td>	
-          <td><%= donation.amount %></td>
-          <td><%= link_to donation.scholarship do%> #<%= donation.scholarship.id %> for <%= donation.scholarship.student.full_name %> <% end %></td>
-          
-          <td><%= donation.valid_from %></td>
-          <td><%= donation.num_of_months %></td>
-          <td><%= link_to donation do%>  <%= donation.id %> <% end %></td>
-            
+          <td><%= p.effective_year %></td>
+          <td><%= number_to_currency(p.lkr, precision: 2, unit: "Rs.")%></td>
+          <td><%= number_to_currency(p.aud, precision: 2) %></td>
+          <% totalAUD += p.aud %>
+          <% totalLKR += p.lkr %>
         </tr>
+      
       <% end %>
+      	<tr>
+      		<th>Total</th>
+      		<th><%= number_to_currency(totalLKR, precision: 2, unit: "Rs.")%></th>
+      		<th><%= number_to_currency(totalAUD, precision: 2)%></th>
+      	</tr>
       </tbody>
-    </table>
-  </div>
+	<tr></tr>
+	<%totalDonations=0 %>
+	  <thead>
+	  <tr><th class="table-section", colspan=3>Your contributions:</th></tr>
+	  <tr>
+	   	<th>Bank date</th>
+	    <th>Allocated for</th>
+	    <th>Amount (AUD) </th>
+	  </tr>
+	  </thead>
+	  <tbody>
+	      <% schol.donations.sort_by{|x| x.bank_date}.each do |donation| %>
+	        <tr>
+	          <td><%= link_to donation do%>  <%= donation.bank_date %> <% end %></td>	
+	          
+	          <!--td><%= link_to donation.scholarship do%> #<%= donation.scholarship.id %> for <%= donation.scholarship.student.full_name %> <% end %></td-->
+	          <td><%= donation.num_of_months %> Months from <%= donation.valid_from %></td>
+	          <td><%= number_to_currency (donation.amount) %></td>
+			  <% totalDonations = totalDonations+donation.amount %>            
+	        </tr>
+	      <% end %>
+	      <tr><th colspan=2>Total </th> <th><%= number_to_currency(totalDonations) %></th></tr>
+		</tbody>
+	</table>
+	
 </div>
 
-
+<% end %>
+<br/><br/>

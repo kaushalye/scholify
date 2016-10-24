@@ -24,6 +24,27 @@ class Sponsor < ActiveRecord::Base
     total
   end
 
+  
+  def total_payments_aud
+    total = 0
+    self.scholarships.each do |schol|
+      schol.payments.each do |p|
+        total += p.amount_aud
+      end
+    end
+    total
+   end
+  
+  def total_payments_lkr
+    total = 0
+    self.scholarships.each do |schol|
+      schol.payments.each do |p|
+          total += p.amount
+        end
+    end
+        total
+    end
+    
   # def outstanding
   #   to_pay = 0
   #   current_aud_lkr = 100
