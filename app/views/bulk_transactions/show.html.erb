@@ -60,7 +60,11 @@
   <%= @bulk_transaction.effective_months %>
 </p>
 
-
-
 <%= link_to 'Edit', edit_bulk_transaction_path(@bulk_transaction) %> |
 <%= link_to 'Back', bulk_transactions_path %>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Payments to students </h4></div>
+  <%= render partial: "payments/payment", locals: {pp:@bulk_transaction.payments} %>
+</div>
+

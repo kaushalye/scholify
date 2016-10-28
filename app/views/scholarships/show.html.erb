@@ -21,7 +21,7 @@
 
     <p>
       <strong>Status:</strong>
-      <%= @scholarship.status %>
+      <%= @scholarship.get_status Date.today %>
     </p>
     <p>
       <strong>Sponsor:</strong>
@@ -30,37 +30,10 @@
     <br/>
   </div>
 </div>
-<div class="text-info">
-  Last payment received for <%#= @scholarship.format_payment(@scholarship.last_payment) %>
-</div>
+
 <div class="panel panel-default">
-  <div class="panel-heading"><h4>Past Payments</h4></div>
-  <div class="panel-body">
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th>Payment Id</th>
-        <th>Amount LKR</th>
-        <th>Amount $AU</th>
-        <th>Year</th>
-        <th>Month</th>
-        <th>Notes</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @scholarship.past_payments.each do |payment| %>
-        <tr>
-          <td><%= link_to payment do %><%= payment.id%><% end %></td>
-          <td><%= payment.amount %></td>
-          <td><%= number_to_currency(payment.amount_aud) %></td>
-          <td><%= payment.effective_year %></td>
-          <td><%= payment.effective_month %></td>
-          <td><%= payment.notes %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
+  <div class="panel-heading"><h4>Payments made to the student</h4></div>
+  <%= render partial: "payments/payment", locals: {pp:@scholarship.past_payments} %>
 </div>
 
 

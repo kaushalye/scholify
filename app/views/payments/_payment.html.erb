@@ -1,0 +1,46 @@
+<div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Payment Id</th>
+        <th>Bank Date</th>
+        <th>Scholarship</th>
+        <th>Student</td>
+        <th>Amount LKR</th>
+        <th>Amount $AU</th>
+        <th>Year</th>
+        <th>Month</th>
+        <th>Notes</th>
+        <th>BulkTx</th>
+      </tr>
+      </thead>
+      <tbody>
+       <% totalAUD=0 %>
+   	  <% totalLKR = 0 %>  
+      <% pp.sort_by{|x| x.bank_date}.reverse.each do |payment| %>
+        <tr>
+          <td><%= link_to payment do %><%= payment.id%><% end %></td>
+    
+          <td><%= payment.bank_date %></td>
+          <td><%= link_to payment.scholarship do%><%= payment.scholarship.id %><%end%></td>
+          <td><%= link_to payment.scholarship.student do%><%=payment.scholarship.student.full_name %><%end%></td>
+          <td><%= number_to_currency(payment.amount, precision: 2, unit: "Rs.") %></td>
+          <td><%= number_to_currency(payment.amount_aud) %></td>
+          <td><%= payment.effective_year %></td>
+          <td><%= payment.effective_month %></td>
+          <td><%= payment.notes %></td>
+          <td><%= link_to payment.bulk_transaction do%><%=payment.bulk_transaction_id %><%end%></td>
+          <%totalAUD = totalAUD +payment.amount_aud  %>
+          <%totalLKR = totalLKR +payment.amount %>
+        </tr>
+      <% end %>
+      <tr>
+      		<th colspan=4>Total</th>
+      		<th><%= number_to_currency(totalLKR, precision: 2, unit: "Rs.")%></th>
+      		<th><%= number_to_currency(totalAUD, precision: 2)%></th>
+      		<th colspan=4></th>
+      	</tr>
+      </tbody>
+      
+    </table>
+  </div>

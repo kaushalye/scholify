@@ -1,0 +1,88 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Pending payments </h4></div>
+  <div class="panel-body">
+    <% if Payment.eligible_payments.size >0 %>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Rs</th>
+          <th>Student</th>
+          <th>Schol Start</th>
+          <% Payment.eligible_payments.map{ |p| p.month}.uniq.sort.each do |month| %>
+            <th><%= Payment.format_year_month month %></th>
+          <% end %>
+        </tr>
+        </thead>
+        <tbody>
+        <% Payment.eligible_payments.map{ |p| p.scholarship}.uniq.sort_by!{|s| s.start_date}.each do |schol| %>
+          <tr>
+            <td><%= schol.amount  %></td>
+            <td><%= schol.student.id %>.<%= schol.student.full_name %> </td>
+            <td><%= schol.start_date  %></td>
+            <% Payment.eligible_payments.map{ |p| p.effective_month}.uniq.sort.each do |month| %>
+              <% if Payment.eligible_payments.any? {|x| x.effective_month == month && x.scholarship.id == schol.id} %>
+                <td><input type="checkbox" class="payment_check" checked name="f_month" value="<%= schol.id  %>.<%= month %>"/></td>
+              <% else %>
+                <td></td>
+              <% end %>
+
+            <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+
+      </table>
+      <button type="button" id="payments_save" class= "btn btn-primary">Save selected</button>
+    <% else %>
+      <span>You do not have any pending payments</span>
+    <% end %>
+  </div>
+</div>
+
+
+<br/>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Past payments </h4></div>
+  <div class="panel-body fixed-panel">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Student</th>
+        <th>Scholarship</th>
+        <th>Bank date</th>
+        <th>Year</th>
+        <th>Month</th>
+        <th>Amount (AUD)</th>
+        <th>Amount (Rs)</th>
+        
+        <th>To Acc.</th>
+      </tr>
+      </thead>
+
+
+      <tbody>
+      <% @payments.sort_by{|x| x.bank_date}.reverse.each do |payment| %>
+        <tr>
+          <td><%= link_to payment.student do %><%= payment.scholarship.student.full_name %><%end%></td>
+          <td><%= link_to payment.scholarship do%><%= payment.scholarship.id %><%end%></td>
+          <td><%= payment.bank_date%></td>
+          <td><%= payment.effective_year %></td>
+          <td><%= payment.effective_month %></td>
+          <td><%= number_to_currency(payment.amount_aud) %></td>
+          <td><%= payment.amount %></td>
+          <td><%= payment.to_account %></td>
+          <!--<td><%= link_to '', payment, method: :delete, data: { confirm: 'Are you sure?' }, class: "  glyphicon glyphicon-remove" %></td>-->
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!--<%= link_to 'Add new payments', new_payment_path, class: "btn btn-primary" %>-->

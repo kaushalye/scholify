@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Donations</h1>
+<%= link_to 'New Donation', new_donation_path, class: "btn btn-primary" %>
 
 <table class="table table-striped">
   <thead>
@@ -20,8 +21,8 @@
         <td><%= donation.amount %></td>
         <td><%= donation.valid_from %></td>
         <td><%= donation.num_of_months %></td>
-        <td><%= donation.sponsor.full_name %></td>
-        <td><%= donation.scholarship.id %></td>
+        <td><%= link_to donation.sponsor do %><%=donation.sponsor.full_name %><%end%></td>
+        <td><%= link_to donation.scholarship do%><%=donation.scholarship.id %><%end%></td>
         <td><%= link_to 'View', donation, class: "btn btn-info glyphicon glyphicon-info-sign"%></td>
         <td><%= link_to 'Edit', edit_donation_path(donation), class: "btn btn-warning glyphicon glyphicon-edit" %></td>
         <td><%= link_to 'Delete', donation, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger glyphicon glyphicon-remove" %></td>
@@ -32,4 +33,4 @@
 
 <br>
 
-<%= link_to 'New Donation', new_donation_path, class: "btn btn-primary" %>
+

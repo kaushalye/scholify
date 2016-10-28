@@ -10,6 +10,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Phone</th>
+      <th>Prepaid/Arrears</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,6 +22,7 @@
         <td><%= sponsor.full_name %></td>
         <td><%= sponsor.email %></td>
         <td><%= sponsor.phone %></td>
+        <td><%= number_to_currency(sponsor.total_donations-sponsor.total_payments_aud, precision: 2)%></td>
         <td><%= link_to 'View', sponsor, class: "btn btn-info glyphicon glyphicon-info-sign"%></td>
         <td><%= link_to 'Edit', edit_sponsor_path(sponsor),  class: "btn btn-warning glyphicon glyphicon-edit" %></td>
         <td><%= link_to 'Delete', sponsor, method: :delete, data: { confirm: 'Are you sure?' },  class: "btn btn-danger glyphicon glyphicon-remove"%></td>
@@ -28,6 +30,7 @@
     <% end %>
   </tbody>
 </table>
+
 
 <br>
 

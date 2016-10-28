@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019130423) do
+ActiveRecord::Schema.define(version: 20161028121002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20161019130423) do
     t.decimal  "amount_aud"
     t.integer  "effective_year"
     t.string   "effective_month"
+    t.date     "bank_date"
   end
 
   add_index "payments", ["bulk_transaction_id"], name: "index_payments_on_bulk_transaction_id", using: :btree

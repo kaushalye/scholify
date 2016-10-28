@@ -16,12 +16,12 @@
   </thead>
 
   <tbody>
-    <% @scholarships.each do |scholarship| %>
+    <% @scholarships.sort_by{|x| x.start_date}.reverse.each do |scholarship| %>
       <tr>
         <td><%= scholarship.amount %></td>
         <td><%= scholarship.start_date %></td>
         <td><%= scholarship.end_date %></td>
-        <td><%= scholarship.status %></td>
+        <td><%= scholarship.get_status Date.today %></td>
         <td><%= scholarship.student.full_name %></td>
         <td><%= scholarship.sponsor.full_name %></td>
         <td><%= link_to 'View', scholarship, class: "btn btn-info glyphicon glyphicon-info-sign" %></td>

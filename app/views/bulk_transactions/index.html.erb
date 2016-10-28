@@ -22,7 +22,7 @@
   </thead>
 
   <tbody>
-    <% @bulk_transactions.each do |bulk_transaction| %>
+    <% @bulk_transactions.sort_by{|x| x.bank_date}.reverse.each do |bulk_transaction| %>
       <tr>
         <td><%= bulk_transaction.settled_date %></td>
         <td><%= bulk_transaction.sender %></td>

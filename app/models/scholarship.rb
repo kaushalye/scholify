@@ -39,7 +39,7 @@ class Scholarship < ActiveRecord::Base
         lastDonation = donations.sort_by{|x| x.bank_date}.last
         return lastDonation.valid_from + lastDonation.num_of_months.months
       else
-        reurn self.start_date
+        return self.start_date
       end
  end
     

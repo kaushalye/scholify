@@ -35,5 +35,42 @@
   <%= @student.department %>
 </p>
 
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Scholarships</h4> </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+       <tr>
+       <th>Scholarship Id </th>
+        <th>Sponsor</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Amount (Rs.)</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @student.scholarships.sort_by{|x| x.start_date}.each do |schol| %>
+        <tr>
+          <td><%=link_to schol do%><%=schol.id %><% end %></td>
+          <td><%= link_to schol.sponsor do%>  <%= schol.sponsor.full_name %> <% end %></td>
+          <td><%= schol.start_date %></td>
+          <td><%= schol.end_date %></td>
+          <td><%= number_to_currency(schol.amount , unit:"Rs.", precision: 2)%></td>
+          <td><%= schol.get_status Date.today %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<% @student.scholarships.sort_by{|x| x.start_date}.reverse.each do |schol| %>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Payments made to student for scholarship : <%=link_to schol do%><%=schol.id %><% end %> </h4></div>
+  <%= render partial: "payments/payment", locals: {pp:schol.past_payments} %>
+</div>
+<% end %>
+
 <%= link_to 'Edit', edit_student_path(@student), class: "btn btn-warning" %> |
 <%= link_to 'Back', students_path %>

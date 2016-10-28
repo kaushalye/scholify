@@ -1,6 +1,7 @@
 class Payment < ActiveRecord::Base
   belongs_to :scholarship
   belongs_to :student
+  belongs_to :bulk_transaction
 
   def self.for_scholarship schol_id
     where(:scholarship_id => schol_id)
