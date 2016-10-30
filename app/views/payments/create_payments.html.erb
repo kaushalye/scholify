@@ -1,0 +1,11 @@
+<%= params.inspect %>
+
+<p>
+  <strong>Settled date:</strong>
+  <%= @bulk_transaction.settled_date %>
+</p>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Payments made to student for scholarship</h4></div>
+  <%= render partial: "payments/payment", locals: {pp:@payments} %>
+</div>

@@ -37,6 +37,28 @@ class PaymentsController < ApplicationController
     end
   end
 
+  
+  def create_payments
+    @bulk_transaction=BulkTransaction.find(params['bulk_transaction_id'])
+    @payments=[]
+    params['payment_details'].each do |payment_details| 
+      pd=payment_details[1]
+      if (pd['send_payment']=="1")
+        @payment = Payment.new
+        @payment.scholarship = Scholarship.find_by_id(pd['schol_id'].to_f)
+        @payment.bulk_transaction = @bulk_transaction
+        @payment.amount = pd['amount_lkr'].to_f
+        @payment.amount_aud = @payment.amount/@bulk_transaction.rate
+        @payment.effective_month = pd['effective_month'].to_f
+        @payment.effective_year = pd['effective_year'].to_f
+        @payment.bank_date = pd['bank_date']
+        @payment.notes = pd['notes']
+        @payments.push @payment
+      end
+    end
+    redirect_to @bulk_transaction
+  end
+  
   def multi_payments
     params['selectedPayments'].each do |payment|
       p = payment.split(".")

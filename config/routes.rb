@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :bulk_transactions
+  resources :bulk_transactions do
+  member do
+    get :addpayment
+  end
+end
   resources :payments
   resources :donations
   resources :scholarships
@@ -15,6 +19,8 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'sessions#create'
 
+
+  post '/create_payments', to: "payments#create_payments"  
   post '/multi_payments', to: "payments#multi_payments"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

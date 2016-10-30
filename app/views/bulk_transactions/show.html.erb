@@ -60,6 +60,7 @@
   <%= @bulk_transaction.effective_months %>
 </p>
 
+<%= link_to 'Add Payments',  addpayment_bulk_transaction_path(@bulk_transaction), method: :get,class: "btn btn-warning glyphicon glyphicon-edit" %> |
 <%= link_to 'Edit', edit_bulk_transaction_path(@bulk_transaction) %> |
 <%= link_to 'Back', bulk_transactions_path %>
 

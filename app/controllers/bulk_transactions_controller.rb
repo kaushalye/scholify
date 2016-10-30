@@ -1,6 +1,6 @@
 class BulkTransactionsController < ApplicationController
   before_action :set_bulk_transaction, only: [:show, :edit, :update, :destroy]
-
+  helper_method :addpayment
   # GET /bulk_transactions
   # GET /bulk_transactions.json
   def index
@@ -12,7 +12,17 @@ class BulkTransactionsController < ApplicationController
   def show
     
   end
-
+  
+  def addpayment
+    @bulk_transaction = BulkTransaction.find(params[:id])
+    @scholarships = Scholarship.where(status: "ACTIVE")
+    @payment_details = []
+    @scholarships.each do |schol|
+       @payment_details.push (Payment_Details.new(schol, @bulk_transaction))
+    end
+  end
+   
+  
   # GET /bulk_transactions/new
   def new
     @bulk_transaction = BulkTransaction.new

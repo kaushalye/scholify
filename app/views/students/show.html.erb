@@ -57,7 +57,7 @@
           <td><%= schol.start_date %></td>
           <td><%= schol.end_date %></td>
           <td><%= number_to_currency(schol.amount , unit:"Rs.", precision: 2)%></td>
-          <td><%= schol.get_status Date.today %></td>
+          <td><%= schol.status %></td>
         </tr>
       <% end %>
       </tbody>

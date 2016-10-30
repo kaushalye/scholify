@@ -1,0 +1,93 @@
+<h1>Add payments to bulk transaction</h1>
+<%= form_for(@bulk_transaction , :url => create_payments_path, :method => :POST) do |f| %>
+  <% if @bulk_transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bulk_transaction.errors.count, "error") %> prohibited this bulk_transaction from being
+        saved:</h2>
+
+      <ul>
+        <% @bulk_transaction.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+       
+       <tr><th>Settled date</th><td><%= @bulk_transaction.settled_date %></td></tr>
+       <tr><th>Sender</th><td><%= @bulk_transaction.sender %></td></tr>
+       <tr><th>Amount</th><td><%= @bulk_transaction.amount %></td></tr>
+       <tr><th>Amount lkr</th><td><%= @bulk_transaction.amount_lkr %></td></tr>
+       <tr><th>Rate</th><td><%= @bulk_transaction.rate %></td></tr>
+       <tr><th>Bank date</th><td><%= @bulk_transaction.bank_date %></td></tr>
+       <tr><th>Chq no</th><td><%= @bulk_transaction.chq_no %></td></tr>
+       <tr><th>Bank acc</th><td> <%= @bulk_transaction.bank_acc %></td></tr>
+       <tr><th>Beneficiary</th><td><%= @bulk_transaction.beneficiary %></td></tr>
+       <tr><th>Notes</th><td> <%= @bulk_transaction.notes %></td></tr>
+       <tr><th>Effective year</th><td><%= @bulk_transaction.effective_year %></td></tr>
+       <tr><th>Effective months</th><td><%= @bulk_transaction.effective_months %></td></tr>
+       </thead>
+       </table>
+       
+       <%= hidden_field_tag(:bulk_transaction_id, @bulk_transaction.id) %>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Scholarships</h4></div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Sponsor</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Status</th>
+      <th>Scholarship Amount(Rs.)</th>
+      <th>Pay</th>
+      <th>Amount Paid (Rs.)</th>
+      <th>Bank Date</th>
+      <th>Effective Year</th>
+      <th>Effective Month</th>
+      <th>Notes</th>
+     </tr>
+  </thead>
+
+  <tbody>
+    <% @payment_details.each do |payment_detail| %>
+    <%= fields_for 'payment_details[]', payment_detail do |p| %>
+    	<% scholarship = payment_detail.scholarship %>
+      <tr>
+        <td><%= scholarship.student.full_name %></td>
+        <td><%= scholarship.sponsor.full_name %></td>
+        <td><%= scholarship.start_date %></td>
+        <td><%= scholarship.end_date %></td>
+        <td><%= scholarship.status %></td>
+        <td><%= scholarship.amount %></td>
+        <td><%= p.check_box :send_payment %></td>
+        <td><%= p.text_field :amount_lkr ,"size" => 10 %></td>
+        <td><%= p.text_field :bank_date ,"size" => 10 %></td>
+        <td><%= p.text_field :effective_year ,"size" => 4%></td>
+        <td><%= p.text_field :effective_month,"size" => 2%></td>
+         <td><%= p.text_field :notes %></td>
+         <%= p.hidden_field :schol_id %>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+    <div class="actions">
+      <%= f.submit 'Create Payments', class: 'btn btn-primary' %>
+    </div>
+    
+</div>
+
+    
+
+<% end %>
+
+
+<%= link_to 'Show', @bulk_transaction %> |
+<%= link_to 'Back', bulk_transactions_path %>

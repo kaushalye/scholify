@@ -21,7 +21,7 @@
         <td><%= scholarship.amount %></td>
         <td><%= scholarship.start_date %></td>
         <td><%= scholarship.end_date %></td>
-        <td><%= scholarship.get_status Date.today %></td>
+        <td><%= scholarship.status %></td>
         <td><%= scholarship.student.full_name %></td>
         <td><%= scholarship.sponsor.full_name %></td>
         <td><%= link_to 'View', scholarship, class: "btn btn-info glyphicon glyphicon-info-sign" %></td>
