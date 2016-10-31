@@ -22,7 +22,7 @@
           <td><%= link_to payment do %><%= payment.id%><% end %></td>
     
           <td><%= payment.bank_date %></td>
-          <td><%= link_to payment.scholarship do%><%= payment.scholarship.id %><%end%></td>
+          <td><%= link_to payment.scholarship do%><%= payment.scholarship.id %><%end%> </td>
           <td><%= link_to payment.scholarship.student do%><%=payment.scholarship.student.full_name %><%end%></td>
           <td><%= number_to_currency(payment.amount, precision: 2, unit: "Rs.") %></td>
           <td><%= number_to_currency(payment.amount_aud) %></td>

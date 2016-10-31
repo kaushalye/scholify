@@ -54,6 +54,10 @@ Why do you want to switch to sqlite? Use mysql as I've configured. That's what w
 NOTES::
 Disable bootstrap : remove line from app/assets/stylesheets/application.js
  *= require bootstrap/dist/css/bootstrap 
+Useful resources
+AJAX
+https://kernelgarden.wordpress.com/2014/02/26/dynamic-select-boxes-in-rails-4/
+
 
 environment variables
 source env.sh
@@ -65,4 +69,6 @@ rails g migration remove_month_from_payment month:integer
 rails g migration remove_student_id_from_payment student:reference
 
 rails g migration alter_effective_month_table_payment effective_month:string
+
+
 

@@ -25,8 +25,9 @@
     <%= f.text_field :num_of_months, class:"form-control", :required => true %>
   </div>
   <div class="field">
+    
     <%= f.label :sponsor_id %><br>
-    <%= f.collection_select :sponsor_id, Sponsor.all, :id, :full_name, {:prompt=>true}, {:class=>'form-control', :required => true} %>
+    <%= f.collection_select :sponsor_id, Sponsor.all, :id, :full_name, {:prompt=>true}, {:class=>'form-control', :required => true, :'data-remote' => 'true', :'data-url' => url_for(:controller => 'listings', :action => 'submit_sponsor', format: 'js')} %>
   </div>
   <div class="field">
     <%= f.label :scholarship_id %><br>

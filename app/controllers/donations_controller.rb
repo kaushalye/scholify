@@ -20,7 +20,9 @@ class DonationsController < ApplicationController
   # GET /donations/1/edit
   def edit
   end
+  
 
+    
   # POST /donations
   # POST /donations.json
   def create
