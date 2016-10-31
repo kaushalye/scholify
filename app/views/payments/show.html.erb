@@ -1,4 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Payment details </h4> </div>
+  <div class="panel-body">
+	<table>
+	<thead>
+	<tr><th>Payment Id</th><td><%=@payment.id %> Bulk Transaction Ref: <%= link_to @payment.bulk_transaction do %><%=@payment.bulk_transaction.id%><% end %></td></tr>
+	<tr><th>Scholarship</th><td> 
+		<%=link_to @payment.scholarship do %><%=@payment.scholarship.id%> <%end%>
+		<%=link_to @payment.scholarship.student do @payment.scholarship.student.full_name  end%> 
+		, sponsored by  <%=link_to @payment.scholarship.sponsor do @payment.scholarship.sponsor.full_name end%>  </td></tr>
+	<tr><th>Bank Date</th><td><%=@payment.bank_date %></td></tr>	
+	<tr><th>Amount LKR</th><td><%=number_to_currency(@payment.amount , unit:"Rs.", precision: 2) %></td></tr>
+	<tr><th>Amount AUD</th><td><%=number_to_currency(@payment.amount_aud, precision: 2) %></td></tr>
+	<tr><th>Effective Year</th><td><%=@payment.effective_year %></td></tr>
+	<tr><th>Effective Month(s) </th><td><%=@payment.effective_month %></td></tr>
+	<tr><th>Notes</th><td><%=@payment.notes %></td></tr>
+	</thead>
+	</table>
+  </div>
+ </div>
 
 <%= link_to 'Edit', edit_payment_path(@payment) %> |
 <%= link_to 'Back', payments_path %>

@@ -21,7 +21,6 @@ end
 
 
   post '/create_payments', to: "payments#create_payments"  
-  post '/multi_payments', to: "payments#multi_payments"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

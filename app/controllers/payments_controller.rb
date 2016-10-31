@@ -59,19 +59,6 @@ class PaymentsController < ApplicationController
     redirect_to @bulk_transaction
   end
   
-  def multi_payments
-    params['selectedPayments'].each do |payment|
-      p = payment.split(".")
-      @payment = Payment.new
-      @payment.scholarship = Scholarship.find_by_id(p[0])
-      @payment.month = p[1]
-      @payment.amount = @payment.scholarship.amount
-      @payment.student_id = @payment.scholarship.student.id
-
-      @payment.save
-    end
-    redirect_to @payment
-  end
   # PATCH/PUT /payments/1
   # PATCH/PUT /payments/1.json
   def update
@@ -104,6 +91,6 @@ class PaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.fetch(:payment, {})
+      params.require(:payment).permit(:bank_date, :amount,:amount_aud,:effective_year, :effective_month, :notes)
     end
 end
