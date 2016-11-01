@@ -3,11 +3,11 @@
 <h1><%= @sponsor.title %> <%= @sponsor.first_name %>  <%= @sponsor.last_name %></h1>
 <p> <small>E:  <%= @sponsor.email %> <br/> T:  <%= @sponsor.phone %></small></p>
 
-<div class="righty">
-  <p>Total payments to your scholarships :<span class="highlight"> <%= number_to_currency(@sponsor.total_payments_lkr, unit: "Rs.", precision: 2) %></span></p>
-  <p>Total value of payments in AUD:<span class="highlight"> <%= number_to_currency(@sponsor.total_payments_aud, precision: 2) %></span></p>
+<div class="text-right">
+  <p>Total payments to your scholarships :<span class="text-info"> <%= number_to_currency(@sponsor.total_payments_lkr, unit: "Rs.", precision: 2) %></span></p>
+  <p>Total value of payments in AUD:<span class="text-info"> <%= number_to_currency(@sponsor.total_payments_aud, precision: 2) %></span></p>
   
-  <p>Contributions made by you:<span class="highlight"> <%= number_to_currency(@sponsor.total_donations, precision: 2) %></span></p>
+  <p>Contributions made by you:<span class="text-info"> <%= number_to_currency(@sponsor.total_donations, precision: 2) %></span></p>
 </div>
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Your Sponsorships</h4> </div>
@@ -46,7 +46,7 @@
   <div class="panel-heading"><h4>Summary of sponsorship : <%= schol.student.full_name %></h4></div>
   <% nextDonationDue = schol.get_next_donation_due_date %>
   <% if (nextDonationDue < Date.today and nextDonationDue < schol.end_date ) %> 
-  	<h4><span class="hilight2">Contributions due from <%=nextDonationDue%></span></h4>
+  	<h4><span class="text-danger">Contributions due from <%=nextDonationDue%></span></h4>
   <% end %>
    <% totalAUD=0 %>
    <% totalLKR = 0 %>  

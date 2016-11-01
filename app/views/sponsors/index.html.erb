@@ -22,7 +22,14 @@
         <td><%= sponsor.full_name %></td>
         <td><%= sponsor.email %></td>
         <td><%= sponsor.phone %></td>
-        <td><%= number_to_currency(sponsor.total_donations-sponsor.total_payments_aud, precision: 2)%></td>
+        <% gap =sponsor.total_donations-sponsor.total_payments_aud %>
+        <td><%if (gap <0) %> 
+        		<span class="text-danger">
+        	<% else %>
+        		<span class="text-info">
+        	<% end %> 
+        	<%= number_to_currency(gap, precision: 2)%>
+        	</span></td>
         <td><%= link_to 'View', sponsor, class: "btn btn-info glyphicon glyphicon-info-sign"%></td>
         <td><%= link_to 'Edit', edit_sponsor_path(sponsor),  class: "btn btn-warning glyphicon glyphicon-edit" %></td>
         <td><%= link_to 'Delete', sponsor, method: :delete, data: { confirm: 'Are you sure?' },  class: "btn btn-danger glyphicon glyphicon-remove"%></td>
