@@ -7,7 +7,7 @@ class Scholarship < ActiveRecord::Base
   validates :student, presence: true
   validates :sponsor, presence: true
 
-  STATUSES = ['ACTIVE', 'INACTIVE']
+  STATUSES = ['ACTIVE', 'COMPLETED']
   NUM_OF_SCHOLS_PER_YEAR = 10
 
  

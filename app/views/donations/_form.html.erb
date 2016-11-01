@@ -11,6 +11,17 @@
     </div>
   <% end %>
   <div class="field">
+   <div class="field">
+    <%= f.label :bank_date %><br>
+    <%= f.date_select :bank_date , {}, { :required => true} %>
+  </div>
+  <div class="field">
+    <%= f.label :account %><br>
+    <%= f.text_field :account, class:"form-control", :required => false %>
+  </div>
+
+  <div class="field">
+  
     <%= f.label :amount %> <br>
     <div class="input-group">
       <span class="input-group-addon">$</span><%= f.text_field :amount, class:"form-control currency", :required => true%>

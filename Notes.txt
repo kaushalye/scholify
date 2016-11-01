@@ -58,6 +58,8 @@ Useful resources
 AJAX
 https://kernelgarden.wordpress.com/2014/02/26/dynamic-select-boxes-in-rails-4/
 
+Push db:
+PGUSER=postgres PGPASSWORD=postgres heroku pg:push scholify_development DATABASE_URL --app scholify
 
 environment variables
 source env.sh
