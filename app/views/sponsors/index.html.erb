@@ -1,6 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-
 <h1>Sponsors</h1>
 <%= link_to 'New Sponsor', new_sponsor_path, class: "btn btn-primary"  %>
 <table class="table table-striped">
@@ -16,7 +15,7 @@
   </thead>
 
   <tbody>
-    <% @sponsors.each do |sponsor| %>
+    <% @sponsors.sort_by{|x| x.id}.each do |sponsor| %>
       <tr>
         <td><%= sponsor.title %></td>
         <td><%= sponsor.full_name %></td>
@@ -30,15 +29,16 @@
         	<% end %> 
         	<%= number_to_currency(gap, precision: 2)%>
         	</span></td>
-        <td><%= link_to 'View', sponsor, class: "btn btn-info glyphicon glyphicon-info-sign"%></td>
-        <td><%= link_to 'Edit', edit_sponsor_path(sponsor),  class: "btn btn-warning glyphicon glyphicon-edit" %></td>
-        <td><%= link_to 'Delete', sponsor, method: :delete, data: { confirm: 'Are you sure?' },  class: "btn btn-danger glyphicon glyphicon-remove"%></td>
+        <td><%= link_to 'View', sponsor, class: "btn btn-info"%></td>
+        <td><%= link_to 'Edit', edit_sponsor_path(sponsor),  class: "btn btn-warning" %></td>
+        <td><%= link_to 'Delete', sponsor, method: :delete, data: { confirm: 'Are you sure?' },  class: "btn btn-danger"%></td>
       </tr>
     <% end %>
-  </tbody>
+  	</tbody>
 </table>
 
+<br/>
+<br/>
 
-<br>
 
 
