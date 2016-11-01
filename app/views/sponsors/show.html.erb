@@ -43,7 +43,7 @@
 
 <% @sponsor.scholarships.sort_by{|x| x.start_date}.reverse.each do |schol| %>
 <div class="panel panel-default">
-  <div class="panel-heading"><h4>Summary of sponsorship : <%= schol.student.full_name %></h4></div>
+  <div class="panel-heading"><h4>Summary of sponsorship : <%= link_to schol do schol.student.full_name end%></h4></div>
   <% nextDonationDue = schol.get_next_donation_due_date %>
   <% if (nextDonationDue < Date.today and nextDonationDue < schol.end_date ) %> 
   	<h4><span class="text-danger">Contributions due from <%=nextDonationDue%></span></h4>
@@ -52,7 +52,7 @@
    <% totalLKR = 0 %>  
   <table class="table table-striped">
       <thead>
- 	  <tr><th class="table-section" colspan=3> Scholarship payments made to the student:</th></tr>
+ 	  <tr><th class="bg-info" colspan=3> Scholarship payments made to the student:</th></tr>
       <tr>
         <th>Year</th>
         <th>Amount (Rs.)</th>
@@ -82,7 +82,7 @@
 	<tr></tr>
 	<%totalDonations=0 %>
 	  <thead>
-	  <tr><th class="table-section", colspan=3>Your contributions:</th></tr>
+	  <tr><th class="bg-info", colspan=3>Your contributions:</th></tr>
 	  <tr>
 	   	<th>Bank date</th>
 	    <th>Allocated for</th>

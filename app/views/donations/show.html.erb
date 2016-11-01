@@ -3,17 +3,28 @@
 
 <p>
   <strong>Sponsor:</strong>
-  <%= @donation.sponsor.full_name %>
+  <%= link_to @donation.sponsor do @donation.sponsor.full_name end%>
 </p>
 
 <p>
   <strong>Scholarship:</strong>
-  <%= @donation.scholarship_id %>
+  <%=link_to @donation.scholarship do %><%=@donation.scholarship_id%><%end %> for student : <%=link_to @donation.scholarship.student do @donation.scholarship.student.full_name  end%>  
 </p>
+
 
 <p>
   <strong>Amount:</strong>
-  <%= @donation.amount %>
+  <%= number_to_currency(@donation.amount) %>
+</p>
+
+<p>
+  <strong>Bank Date:</strong>
+  <%= @donation.bank_date %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @donation.account %>
 </p>
 
 <p>
