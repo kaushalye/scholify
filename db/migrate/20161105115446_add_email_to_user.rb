@@ -1,5 +1,5 @@
 class AddEmailToUser < ActiveRecord::Migration
   def change
-    add_column :user, :email, :string
+    add_column :users, :email, :string
   end
 end
