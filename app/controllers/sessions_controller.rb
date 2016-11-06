@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
                       "marasinghe@gmail.com",
                       "rasika.amarasiri@gmail.com",
                       "susantha.liyanage@gmail.com",
+                      "randykaru@gmail.com",
                       "des.fdo@gmail.com"
                     ]
   def create
