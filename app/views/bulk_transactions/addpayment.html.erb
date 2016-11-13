@@ -45,14 +45,15 @@
       <th>Start date</th>
       <th>End date</th>
       <th>Status</th>
-      <th>Scholarship Amount(Rs.)</th>
+      <th>Scholarship Amount(Rs.) </th>
       <th>Pay</th>
-      <th>Amount Paid (Rs.)</th>
-      <th>Bank Date</th>
-      <th>Effective Year</th>
-      <th>Effective Month</th>
-      <th>Notes</th>
+      <th>Amount Paid (Rs.) <%= text_field(:com, :amount_lkr, size:10 ) %></th>
+      <th>Bank Date <%= text_field(:com, :bank_date, size:10)%></th>
+      <th>Effective Year <%= text_field(:com, :effective_year, size:4)%></th>
+      <th>Effective Month<%= text_field(:com, :effective_month, size:2)%></th>
+      <th>Notes <%= text_field(:com, :notes, size:20)%></th>
      </tr>
+   
   </thead>
 
   <tbody>
@@ -67,11 +68,11 @@
         <td><%= scholarship.status %></td>
         <td><%= scholarship.amount %></td>
         <td><%= p.check_box :send_payment %></td>
-        <td><%= p.text_field :amount_lkr ,"size" => 10 %></td>
-        <td><%= p.text_field :bank_date ,"size" => 10 %></td>
-        <td><%= p.text_field :effective_year ,"size" => 4%></td>
-        <td><%= p.text_field :effective_month,"size" => 2%></td>
-         <td><%= p.text_field :notes %></td>
+        <td><%= p.text_field :amount_lkr ,"size" => 10 , class: "amount-lkr" %></td>
+        <td><%= p.text_field :bank_date ,"size" => 10 , class: "bank-date" %></td>
+        <td><%= p.text_field :effective_year ,"size" => 4 , class: "effective-year" %></td>
+        <td><%= p.text_field :effective_month,"size" => 2, class: "effective-month" %></td>
+         <td><%= p.text_field :notes , class: "notes" %></td>
          <%= p.hidden_field :schol_id %>
       </tr>
     <% end %>
