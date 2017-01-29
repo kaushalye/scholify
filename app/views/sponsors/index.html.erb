@@ -17,7 +17,7 @@
   <tbody>
     <% @sponsors.sort_by{|x| x.id}.each do |sponsor| %>
       <tr>
-        <td><%= sponsor.title %></td>
+        <td><%= link_to sponsor.title, sponsor, :format=> :pdf %></td>
         <td><%= sponsor.full_name %></td>
         <td><%= sponsor.email %></td>
         <td><%= sponsor.phone %></td>

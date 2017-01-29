@@ -62,4 +62,7 @@ end
 #   gem 'pg', '0.15.1'
 # end
 
+gem 'prawn'
+gem 'prawn-table'
+
 ruby "2.3.1"

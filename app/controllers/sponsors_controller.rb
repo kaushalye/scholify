@@ -10,6 +10,13 @@ class SponsorsController < ApplicationController
   # GET /sponsors/1
   # GET /sponsors/1.json
   def show
+    respond_to do |format|
+         format.html
+         format.pdf do
+           pdf = SponsorReportPdf.new(@sponsor)
+           send_data pdf.render, filename: @sponsor.full_name+'.pdf', type: 'application/pdf'
+         end
+       end
   end
 
   # GET /sponsors/new

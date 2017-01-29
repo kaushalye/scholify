@@ -8,5 +8,9 @@ class Student < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+  
+  def external_name
+    "#{first_name} #{last_name[0,1]}."
+  end
 
 end
