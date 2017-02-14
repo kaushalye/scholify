@@ -10,19 +10,22 @@
       <th>End date</th>
       <th>Status</th>
       <th>Student</th>
+      <th> Email</th>
       <th>Sponsor</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @scholarships.sort_by{|x| x.start_date}.reverse.each do |scholarship| %>
+  
+    <% @scholarships.order(status: :asc, end_date: :asc).each do |scholarship| %>
       <tr>
         <td><%= scholarship.amount %></td>
         <td><%= scholarship.start_date %></td>
         <td><%= scholarship.end_date %></td>
         <td><%= scholarship.status %></td>
         <td><%= scholarship.student.full_name %></td>
+        <td><%= scholarship.student.email %></td>
         <td><%= scholarship.sponsor.full_name %></td>
         <td><%= link_to 'View', scholarship, class: "btn btn-info glyphicon glyphicon-info-sign" %></td>
         <td><%= link_to 'Edit', edit_scholarship_path(scholarship), class: "btn btn-warning glyphicon glyphicon-edit" %></td>

@@ -17,7 +17,7 @@
       <tbody>
        <% totalAUD=0 %>
    	  <% totalLKR = 0 %>  
-      <% pp.sort_by{|x| x.bank_date}.reverse.each do |payment| %>
+      <% pp.sort_by{|x| [x.bank_date, x.effective_year]}.reverse.each do |payment| %>
         <tr>
           <td><%= link_to payment do %><%= payment.id%><% end %></td>
     

@@ -5,17 +5,21 @@ class SponsorReportPdf < Prawn::Document
     @sponsor = sponsor
     header
     text_content
+    move_down 10
+    text "Report date: #{Date.today}"
     #table_content
   end
 
   def header
     #This inserts an image in the pdf file and sets the size of the image
     #image "#{Rails.root}/app/assets/images/header.png", width: 530, height: 150
-    text  "#{@sponsor.title} #{@sponsor.first_name} #{@sponsor.last_name}", size: 25, style: :bold
+    text "#{@sponsor.title} #{@sponsor.first_name} #{@sponsor.last_name}", size: 25, style: :bold
     text "E: #{@sponsor.email}"
     text "T: #{@sponsor.phone}"
+    
     move_down 10
-    text "Summary:", size: 15, style: :bold
+    text "Summary :", size: 15, style: :bold
+   
     bgcolor= "AAFFAA"
     if (@sponsor.total_donations<@sponsor.total_payments_aud)
       bgcolor= "F8C471"
@@ -23,7 +27,7 @@ class SponsorReportPdf < Prawn::Document
     data = [
       ["Total payments to your scholarships", "#{number_to_currency(@sponsor.total_payments_lkr, unit: "Rs.", precision: 2)}"],
       ["Total value of payments in AUD","#{number_to_currency(@sponsor.total_payments_aud, precision: 2)}"],
-      ["Contributions made by you",{:content=>"#{number_to_currency(@sponsor.total_donations, precision: 2)}", :background_color=>bgcolor}] ]
+      ["Contributions you've made to date",{:content=>"#{number_to_currency(@sponsor.total_donations, precision: 2)}", :background_color=>bgcolor}] ]
 
     table(data) do
       columns(1).align = :right
