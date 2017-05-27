@@ -15,7 +15,7 @@
   </tr>
   </thead>
   <tbody>
-    <% @donations.each do |donation| %>
+    <% @donations.order(bank_date: :desc, valid_from: :desc).each do |donation| %>
       <tr>
       	<td><%= donation.bank_date %></td>
         <td><%= donation.amount %></td>

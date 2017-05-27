@@ -59,8 +59,13 @@ AJAX
 https://kernelgarden.wordpress.com/2014/02/26/dynamic-select-boxes-in-rails-4/
 
 Push db:
-heroku pg:reset DATABASE_URL
+heroku pg:reset DATABASE_URL --confirm scholify
 PGUSER=postgres PGPASSWORD=postgres heroku pg:push scholify_development DATABASE_URL --app scholify
+
+Get latest db from heroku
+heroku pg:backups:capture
+heroku pg:backups:download
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d labsoft_development latest.dump
 
 environment variables
 source env.sh
