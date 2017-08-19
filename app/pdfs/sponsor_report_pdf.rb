@@ -42,8 +42,8 @@ class SponsorReportPdf < Prawn::Document
     text "Your Sponsorships:", size: 15, style: :bold
     data =[["Student", "Start date", "End date", "Faculty", "Amount (Rs.)", "Status"]] 
     @sponsor.scholarships.sort_by{|x| x.start_date}.reverse.each do |schol|
-        data += [[ "#{schol.student.external_name}", "#{schol.start_date}" , "#{schol.end_date}", "#{schol.student.faculty}", 
-        "#{number_to_currency(schol.amount , unit:"Rs.", precision: 2)}" , "#{schol.status}"]]
+        data += [[ "#{schol.student.external_name}", "#{schol.start_date}" , "#{schol.end_date}",
+          "#{schol.student.faculty}", "#{number_to_currency(schol.amount , unit:"Rs.", precision: 2)}" , "#{schol.status}"]]
     end  
     table(data) do
       rows(0).font_style = :bold

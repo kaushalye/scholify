@@ -17,7 +17,8 @@ class SponsorsController < ApplicationController
         send_data pdf.render, filename: @sponsor.full_name+'.pdf', type: 'application/pdf'
       end
     end
-    SponsorMailer.welcome_email2(@sponsor).deliver_later
+    #SponsorMailer.sendReport(@sponsor).deliver_now
+      
   end
 
   # GET /sponsors/new

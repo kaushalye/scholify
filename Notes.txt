@@ -65,7 +65,7 @@ PGUSER=postgres PGPASSWORD=postgres heroku pg:push scholify_development DATABASE
 Get latest db from heroku
 heroku pg:backups:capture
 heroku pg:backups:download
-pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d labsoft_development latest.dump
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d scholify_development latest.dump
 
 environment variables
 source env.sh
