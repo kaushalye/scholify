@@ -9,9 +9,9 @@ one:
   url: MyString
 
 two:
-  provider: MyString
-  uid: MyString
-  name: MyString
-  location: MyString
-  image_url: MyString
-  url: MyString
+  provider: MyString2
+  uid: MyString2
+  name: MyString2
+  location: MyString2
+  image_url: MyString2
+  url: MyString2

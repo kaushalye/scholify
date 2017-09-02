@@ -13,12 +13,12 @@ class SponsorsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = SponsorReportPdf.new(@sponsor)
-        send_data pdf.render, filename: @sponsor.full_name+'.pdf', type: 'application/pdf'
+        #pdf = SponsorReportPdf.new(@sponsor)
+        #send_data pdf.render, filename: @sponsor.full_name+'.pdf', type: 'application/pdf'
+        SponsorReportMailer.send_report(@sponsor).deliver_later
+        redirect_to sponsors_path, notice: 'Email sent to sponsor :'+@sponsor.full_name 
       end
     end
-    #SponsorMailer.sendReport(@sponsor).deliver_now
-      
   end
 
   # GET /sponsors/new
@@ -28,6 +28,11 @@ class SponsorsController < ApplicationController
 
   # GET /sponsors/1/edit
   def edit
+    #@sponsors = Sponsor.all
+    #@sponsors.each do |sponsor|
+    #  SponsorReportMailer.send_report(sponsor).deliver_later
+    #  logger.info "Email sent for user #{sponsor.full_name}"
+    #  end
   end
 
   # POST /sponsors

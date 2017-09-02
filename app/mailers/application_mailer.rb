@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "secretary@umaav.org.au"
+  default from: "UMAAV Secretary <secretary@umaav.org.au>"
   layout 'mailer'
 end

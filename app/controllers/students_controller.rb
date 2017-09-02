@@ -10,6 +10,14 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+    respond_to do |format|
+          format.html
+          format.pdf do
+            pdf = StudentReportPdf.new(@student)
+            send_data pdf.render, filename: @student.full_name+'.pdf', type: 'application/pdf'
+        #SponsorReportMailer.send_report(@sponsor).deliver_later
+          end
+    end
   end
 
   # GET /students/new

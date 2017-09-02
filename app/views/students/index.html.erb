@@ -24,7 +24,7 @@
         <td><%= student.address %></td>
         <td><%= student.faculty %></td>
         <td><%= student.department %></td>
-        <td><%= link_to 'View', student , class: "btn btn-info glyphicon glyphicon-info-sign" %></td>
+        <td><%= link_to 'View', student_path(student,format: 'pdf'), class: "btn btn-info glyphicon glyphicon-info-sign" %></td>
         <td><%= link_to 'Edit', edit_student_path(student), class: "btn btn-warning glyphicon glyphicon-edit" %></td>
         <td><%= link_to 'Delete', student, method: :delete, data: { confirm: 'Are you sure?'} , class: "btn btn-danger glyphicon glyphicon-remove" %></td>
       </tr>

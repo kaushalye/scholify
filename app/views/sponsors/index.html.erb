@@ -17,7 +17,7 @@
   <tbody>
     <% @sponsors.sort_by{|x| x.id}.each do |sponsor| %>
       <tr>
-        <td><%= link_to sponsor.title, sponsor_path(sponsor,format: 'pdf') %></td>
+        <td><%= sponsor.title %></td>
         <td><%= sponsor.full_name %></td>
         <td><%= sponsor.email %></td>
         <td><%= sponsor.phone %></td>
@@ -29,7 +29,8 @@
         	<% end %> 
         	<%= number_to_currency(gap, precision: 2)%>
         	</span></td>
-        <td><%= link_to 'View', sponsor, class: "btn btn-info"%></td>
+        <td><%= link_to 'View', sponsor, class: "btn btn-success"%></td>
+        <td><%= link_to 'EMail', sponsor_path(sponsor,format: 'pdf'), class: "btn btn-info"%></td>
         <td><%= link_to 'Edit', edit_sponsor_path(sponsor),  class: "btn btn-warning" %></td>
         <td><%= link_to 'Delete', sponsor, method: :delete, data: { confirm: 'Are you sure?' },  class: "btn btn-danger"%></td>
       </tr>

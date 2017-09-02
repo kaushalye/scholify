@@ -20,15 +20,18 @@ class SponsorReportPdf < Prawn::Document
     move_down 10
     text "Summary :", size: 15, style: :bold
    
-    bgcolor= "AAFFAA"
+    bgcolor= "4EEE61"
+    balanceStr="Balance prepaid"
     if (@sponsor.total_donations<@sponsor.total_payments_aud)
-      bgcolor= "F8C471"
+      bgcolor= "F55151"
+      balanceStr="Balance outstanding"
     end
     data = [
-      ["Total payments to your scholarships", "#{number_to_currency(@sponsor.total_payments_lkr, unit: "Rs.", precision: 2)}"],
+      ["Total payments to your scholarships", "#{number_to_currency(@sponsor.total_payments_lkr, unit: "Rs.", precision: 0)}"],
       ["Total value of payments in AUD","#{number_to_currency(@sponsor.total_payments_aud, precision: 2)}"],
-      ["Contributions you've made to date",{:content=>"#{number_to_currency(@sponsor.total_donations, precision: 2)}", :background_color=>bgcolor}] ]
-
+      ["Contributions you've made to-date","#{number_to_currency(@sponsor.total_donations, precision: 2)}" ] ,
+      [balanceStr ,{:content=>"#{number_to_currency( (@sponsor.total_donations-@sponsor.total_payments_aud).abs, precision: 2)}", :background_color=>bgcolor}] ]
+      
     table(data) do
       columns(1).align = :right
       cells.padding = 5
@@ -40,10 +43,10 @@ class SponsorReportPdf < Prawn::Document
     # Summary of scholarships
     move_down 30
     text "Your Sponsorships:", size: 15, style: :bold
-    data =[["Student", "Start date", "End date", "Faculty", "Amount (Rs.)", "Status"]] 
+    data =[["Student", "Start date", "End date", "Faculty",  "Status"]] # "Amount (Rs.)",
     @sponsor.scholarships.sort_by{|x| x.start_date}.reverse.each do |schol|
         data += [[ "#{schol.student.external_name}", "#{schol.start_date}" , "#{schol.end_date}",
-          "#{schol.student.faculty}", "#{number_to_currency(schol.amount , unit:"Rs.", precision: 2)}" , "#{schol.status}"]]
+          "#{schol.student.faculty}",  "#{schol.status}"]] # "#{number_to_currency(schol.amount , unit:"Rs.", precision: 2)}" ,
     end  
     table(data) do
       rows(0).font_style = :bold
@@ -72,12 +75,12 @@ class SponsorReportPdf < Prawn::Document
    @pp = schol.payments.group(:effective_year).select('effective_year, sum(amount) as lkr, sum(amount_aud) as aud')   
    @pp.sort_by{|x| x.effective_year}.each do |p|
      data += [["#{p.effective_year}",
-       "#{number_to_currency(p.lkr, precision: 2, unit: "Rs.")}",
+       "#{number_to_currency(p.lkr, precision: 0, unit: "Rs.")}",
        "#{number_to_currency(p.aud, precision: 2)}",]]
      totalAUD += p.aud
      totalLKR += p.lkr
    end
-   data += [["<b>Total</b>", "<b>#{number_to_currency(totalLKR, precision: 2, unit: "Rs.")}</b>", "<b>#{number_to_currency(totalAUD, precision: 2)}</b>"]]
+   data += [["<b>Total</b>", "<b>#{number_to_currency(totalLKR, precision:0, unit: "Rs.")}</b>", "<b>#{number_to_currency(totalAUD, precision: 2)}</b>"]]
    
     data+=[[{:content=>"<b>Your contributions:</b>", :colspan=>3, :background_color => "A9CCE3"}]]
     data+=[["Bank date","Allocated for", "Amount (AUD)"]]

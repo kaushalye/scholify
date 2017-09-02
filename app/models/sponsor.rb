@@ -8,6 +8,16 @@ class Sponsor < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def scholarship_start_year
+    firstScholStart = nil
+    self.scholarships.each do |schol|
+      if (firstScholStart==nil or firstScholStart>schol.start_date.year)
+        firstScholStart=schol.start_date.year
+      end
+    end
+    firstScholStart
+  end
+  
   def total_donations
     total = 0
     self.donations.each do |donation|

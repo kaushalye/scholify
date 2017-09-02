@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+Dear <%= @sponsor.title %> <%= @sponsor.first_name %>  <%= @sponsor.last_name %>, <br/></br>
+
+Thank you very much for your support for the UMAAV scholarship program since <%= @sponsor.scholarship_start_year%>, which has been highly valued by the recipients and their family members as well as the academic staff of the University of Moratuwa. <br/>
+The details of the students you have been sponsoring and the scholarship payments made to them are attached herewith for your information. Further details on the students and their academic performances can be provided upon request. <br/>
+
+<pre>
+<b>Attachments: </b>
+* <%=@sponsor.full_name%>_Summary.pdf (Your sponsorship summary)
+* UMAAV Scholarship Program.pdf (Student feedback on the program. <a href="http://umaav.org.au/ScholarshipProgram/">[Online version]</a>)
+Sponsored students:
+<% @sponsor.scholarships.sort_by{|x| x.start_date}.reverse.each do |schol|%>
+* Scholarhsip_<%=schol.student.external_name%>.pdf
+<% end %>
+</pre>
+<br/>
+Your continued support is vital for the success of the scholarship program. Please make your contribution for 2017 together with any amounts due for the past years at your earliest possible. <br/>
+
+At current exchange rate, the cost of scholarship for one year is approximately 280 AUD.</br>
+
+Please use the following bank account details to make future sponsorship deposits and mention your name in the description. <br/>
+
+<b><pre>
+Bank    : Westpac 
+Acc Name: University of Moratuwa Alumni Association in Victoria Inc. 
+BSB     : 033 157 
+Acc No  : 478 820 
+</pre></b>
+
+Thanks and Regards, <br/>
+UMAAV Scholarship Committee.
+
+  </body>
+</html>
+
