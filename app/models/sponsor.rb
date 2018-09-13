@@ -56,11 +56,11 @@ class Sponsor < ActiveRecord::Base
     end
     
     
-  def total_payments_aud_before_FYE
+  def total_payments_aud_before_FYE(fye)
     total = 0
     self.scholarships.each do |schol|
       schol.payments.each do |p|
-        if (p.effective_year<2017 or (p.effective_year==2017 and ['1.0','2.0','3.0','4.0','5.0','6.0'].include?p.effective_month))
+        if (p.effective_year<fye or (p.effective_year==fye and ['1.0','2.0','3.0','4.0','5.0','6.0'].include?p.effective_month))
           total += p.amount_aud
         end
       end
@@ -68,11 +68,11 @@ class Sponsor < ActiveRecord::Base
     total
    end
    
-  def total_payments_aud_within_FYE
+  def total_payments_aud_within_FYE(fye)
     total = 0
     self.scholarships.each do |schol|
       schol.payments.each do |p|
-        if ((p.effective_year==2018 and ['1.0','2.0','3.0','4.0','5.0','6.0'].include?p.effective_month) or (p.effective_year==2017 and ['7.0','8.0','9.0','10.0','11.0','12.0'].include?p.effective_month))
+        if ((p.effective_year==  (fye+1) and ['1.0','2.0','3.0','4.0','5.0','6.0'].include?p.effective_month) or (p.effective_year==fye and ['7.0','8.0','9.0','10.0','11.0','12.0'].include?p.effective_month))
           total += p.amount_aud
         end
       end
@@ -80,10 +80,10 @@ class Sponsor < ActiveRecord::Base
     total
    end
    
-   def total_donations_before_FYE
+   def total_donations_before_FYE(fye)
      total = 0
      self.donations.each do |donation|
-       if (donation.bank_date< Date.new(2017,7,1))
+       if (donation.bank_date< Date.new(fye,7,1))
          total += donation.amount
        end
        
@@ -91,10 +91,10 @@ class Sponsor < ActiveRecord::Base
      total
    end
 
-  def total_donations_within_FYE
+  def total_donations_within_FYE(fye)
     total = 0
     self.donations.each do |donation|
-      if (donation.bank_date>= Date.new(2017,7,1) and donation.bank_date< Date.new(2018,7,1))
+      if (donation.bank_date>= Date.new(fye,7,1) and donation.bank_date< Date.new(fye,7,1))
         total += donation.amount
       end
       

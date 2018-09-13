@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Sponsors</h1>
+<% fye=2017 %>
+<h1>Sponsors Summary  <%=fye %>-<%=fye+1 %> FYE</h1>
 <%= link_to 'New Sponsor', new_sponsor_path, class: "btn btn-primary"  %>
 <table class="table table-striped">
+	
   <thead>
     <tr>
       <th>Title</th>
@@ -10,12 +12,12 @@
       <th>Email</th>
       <th>Phone</th>
       <th>Prepaid/Arrears</th>
-      <th>ScholPayments @20170630</th>
-      <th>Donations @20170630</th>
-      <th>Accrued @ 20170701</th>
-      <th>Schols 17-18FYE</th>
-      <th>Donations 17-18FYE</th>
-      <th>Bad Debt or Acc @ 20170630</th>
+      <th>ScholPayments @<%=fye %>0630</th>
+      <th>Donations @<%=fye %>0630</th>
+      <th>Accrued @ <%=fye %>0701</th>
+      <th>Schols <%=fye %>-<%=fye+1 %>FYE</th>
+      <th>Donations <%=fye %>-<%=fye+1 %>FYE</th>
+      <th>Bad Debt or Acc @ <%=fye %>0630</th>
       
       <th colspan="1"></th>
     </tr>
@@ -36,14 +38,23 @@
         	<% end %> 
         	<%= number_to_currency(gap, precision: 2)%>
         </span></td>
-        <td><%= number_to_currency(sponsor.total_payments_aud_before_FYE) %></td>
-        <td><%= number_to_currency(sponsor.total_donations_before_FYE) %></td>
-        
-        <td><%= number_to_currency(sponsor.total_payments_aud_before_FYE - sponsor.total_donations_before_FYE) %></td>
 
-		<td><%= number_to_currency(sponsor.total_payments_aud_within_FYE) %></td>
-        <td><%= number_to_currency(sponsor.total_donations_within_FYE) %></td>
-        <% debt = sponsor.total_donations_within_FYE - (sponsor.total_payments_aud_before_FYE - sponsor.total_donations_before_FYE + sponsor.total_payments_aud_within_FYE) %>
+        <% 
+        	paymentsSOY=sponsor.total_payments_aud_before_FYE(fye)
+        	donationsSOY=sponsor.total_donations_before_FYE(fye)
+        	accruedSOY=paymentsSOY-donationsSOY
+        	paymentsFYE=sponsor.total_payments_aud_within_FYE(fye)
+        	donationsFYE=sponsor.total_donations_within_FYE(fye)
+        	debt = donationsFYE - (accruedSOY + paymentsFYE) 
+        %>
+        
+        <td><%= number_to_currency(paymentsSOY) %></td>
+        <td><%= number_to_currency(donationsSOY) %></td>
+        
+        <td><%= number_to_currency(accruedSOY) %></td>
+
+		<td><%= number_to_currency(paymentsFYE) %></td>
+        <td><%= number_to_currency(donationsFYE) %></td>
         <td><%if (debt <0) %> 
         		<span class="text-danger">
         	<% else %>
