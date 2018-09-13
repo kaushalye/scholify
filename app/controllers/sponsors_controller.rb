@@ -7,6 +7,12 @@ class SponsorsController < ApplicationController
     @sponsors = Sponsor.all
   end
 
+  # GET /sponsors
+  # GET /sponsors.json
+  def fye_report
+    @sponsors = Sponsor.all
+  end
+  
   # GET /sponsors/1
   # GET /sponsors/1.json
   def show

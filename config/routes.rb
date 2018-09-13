@@ -22,6 +22,10 @@ end
 
   post '/create_payments', to: "payments#create_payments"  
   get 'listings/submit_sponsor', as: 'submit_sponsor'
+  
+  
+  get '/fye_report', to: 'sponsors#fye_report'
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
