@@ -1,5 +1,5 @@
 class SponsorsController < ApplicationController
-  before_action :set_sponsor, only: [:show, :edit, :update, :destroy]
+  before_action :set_sponsor, only: [:show, :edit, :update, :destroy, :send_email]
 
   # GET /sponsors
   # GET /sponsors.json
@@ -15,14 +15,25 @@ class SponsorsController < ApplicationController
   
   # GET /sponsors/1
   # GET /sponsors/1.json
+  def send_email
+    istest=params[:istest]
+    SponsorReportMailer.send_report(@sponsor, istest).deliver_later
+   if (istest == 'true')
+     redirect_to sponsors_path, notice: 'Test Email sent to sponsor :'+@sponsor.full_name 
+   else
+     redirect_to sponsors_path, notice: 'Email sent to sponsor :'+@sponsor.full_name 
+   end
+  end
+  
+  # GET /sponsors/1
+  # GET /sponsors/1.json
   def show
     respond_to do |format|
       format.html
       format.pdf do
-        #pdf = SponsorReportPdf.new(@sponsor)
-        #send_data pdf.render, filename: @sponsor.full_name+'.pdf', type: 'application/pdf'
-        SponsorReportMailer.send_report(@sponsor).deliver_later
-        redirect_to sponsors_path, notice: 'Email sent to sponsor :'+@sponsor.full_name 
+        pdf = SponsorReportPdf.new(@sponsor)
+        send_data pdf.render, filename: @sponsor.full_name+'.pdf', type: 'application/pdf'
+
       end
     end
   end

@@ -51,6 +51,13 @@ in env.sh
 Why do you want to switch to sqlite? Use mysql as I've configured. That's what we need to use in production. Usually sqlite is for testing/demo.
 
 
+rails generate model BadDebt eff_date:date amount:decimal notes:string 
+rails g migration add_sponsor_to_bad_debt sponsor:references
+
+rake db:migrate
+
+
+
 NOTES::
 Disable bootstrap : remove line from app/assets/stylesheets/application.js
  *= require bootstrap/dist/css/bootstrap 

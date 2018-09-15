@@ -1,5 +1,5 @@
 class SponsorReportMailer < ApplicationMailer
-  def send_report(sponsor)
+  def send_report(sponsor, istest)
     @sponsor = sponsor
     @url  = 'http://example.com/login'
     #attachments['filename.html'] = File.read('/media/indika/DATA/SHARE/Documents/Programming/workspace/ScholDb/out/1_UMAAV.html')
@@ -8,15 +8,24 @@ class SponsorReportMailer < ApplicationMailer
     @sponsor.scholarships.sort_by{|x| x.start_date}.reverse.each do |schol|
       attachments['Scholarhsip_'+schol.student.external_name+'.pdf'] = {mime_type: 'application/pdf', content: generate_student_pdf_content(schol.student)}
     end
+    if (istest == 'true')
     mail(
       #to: @sponsor.email,
       #to: 'secretary@umaav.org.au', 
       #cc: 'scholarships@umaav.org.au,president@umaav.org.au,secretary@umaav.org.au',
       #Bcc: 'nishantha.rajapakshe@gmail.com,randykaru@gmail.com,marasinghe@gmail.com,dassa.dml@gmail.com,kaushalye@gmail.com',
-      to: 'scholarships@umaav.org.au',
+      to: 'indikamee@gmail.com',
+      cc: 'scholarships@umaav.org.au',
       subject: 'Your UMAAV Scholarship Summary - ' +  @sponsor.title  + ' ' + @sponsor.full_name)
-    
-    #mail(to: @sponsor.full_name+'.eml', subject: 'Your UMAAV Scholarship Summary - ' +  @sponsor.title  + ' ' + @sponsor.full_name)
+    else
+      mail(
+         to: @sponsor.email,
+         to: 'secretary@umaav.org.au', 
+         cc: 'scholarships@umaav.org.au,president@umaav.org.au,secretary@umaav.org.au',
+         Bcc: 'nishantha.rajapakshe@gmail.com,randykaru@gmail.com,marasinghe@gmail.com,dassa.dml@gmail.com,kaushalye@gmail.com',
+         subject: 'Your UMAAV Scholarship Summary - ' +  @sponsor.title  + ' ' + @sponsor.full_name)
+      #mail(to: @sponsor.full_name+'.eml', subject: 'Your UMAAV Scholarship Summary - ' +  @sponsor.title  + ' ' + @sponsor.full_name)
+    end
   end
   
   private 

@@ -23,6 +23,7 @@ end
   post '/create_payments', to: "payments#create_payments"  
   get 'listings/submit_sponsor', as: 'submit_sponsor'
   
+  get 'sponsors/:id/send_email', to: "sponsors#send_email", as: 'sponsor_send_email'
   
   get '/fye_report', to: 'sponsors#fye_report'
   

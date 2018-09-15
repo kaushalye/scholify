@@ -1,24 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<% fye=2017 %>
+<% fye=2017
+	cur_date = Date.today 
+%>
 <h1>Sponsors Summary  <%=fye %>-<%=fye+1 %> FYE</h1>
-<%= link_to 'New Sponsor', new_sponsor_path, class: "btn btn-primary"  %>
+<%= link_to 'New Sponsor', new_sponsor_path, class: "btn btn-primary"  %> <br/>
+
+<%= link_to 'Back', sponsors_path %>
+
 <table class="table table-striped">
 	
   <thead>
     <tr>
-      <th>Title</th>
       <th>Name</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Prepaid/Arrears</th>
+      
       <th>ScholPayments @<%=fye %>0630</th>
       <th>Donations @<%=fye %>0630</th>
       <th>Accrued @ <%=fye %>0701</th>
       <th>Schols <%=fye %>-<%=fye+1 %>FYE</th>
-      <th>Donations <%=fye %>-<%=fye+1 %>FYE</th>
-      <th>Bad Debt or Acc @ <%=fye %>0630</th>
-      
+      <th>Donations <%=fye+1 %>-<%=fye+1 %>FYE</th>
+      <th>Bad Debt@ <%=fye+1 %>0630</th>
+      <th>Prepaid/Accrued @ <%=fye %>0630</th>
+      <th>Prepaid/Arrears @ <%= cur_date.to_s %></th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -26,26 +29,15 @@
   <tbody>
     <% @sponsors.sort_by{|x| x.id}.each do |sponsor| %>
       <tr>
-        <td><%= sponsor.title %></td>
-        <td><%= sponsor.full_name %></td>
-        <td><%= sponsor.email %></td>
-        <td><%= sponsor.phone %></td>
-        <% gap =sponsor.total_donations-sponsor.total_payments_aud %>
-        <td><%if (gap <0) %> 
-        		<span class="text-danger">
-        	<% else %>
-        		<span class="text-info">
-        	<% end %> 
-        	<%= number_to_currency(gap, precision: 2)%>
-        </span></td>
-
+       <td><%= link_to sponsor do ('[' + sponsor.id.to_s + '] ' + sponsor.title + ' ' + sponsor.full_name) end %></td>
         <% 
         	paymentsSOY=sponsor.total_payments_aud_before_FYE(fye)
         	donationsSOY=sponsor.total_donations_before_FYE(fye)
         	accruedSOY=paymentsSOY-donationsSOY
         	paymentsFYE=sponsor.total_payments_aud_within_FYE(fye)
         	donationsFYE=sponsor.total_donations_within_FYE(fye)
-        	debt = donationsFYE - (accruedSOY + paymentsFYE) 
+        	bad_debts = sponsor.total_bad_debts_at(Date.new(fye+1,6,30))
+        	debt = (donationsFYE + bad_debts) - (accruedSOY + paymentsFYE) 
         %>
         
         <td><%= number_to_currency(paymentsSOY) %></td>
@@ -55,14 +47,25 @@
 
 		<td><%= number_to_currency(paymentsFYE) %></td>
         <td><%= number_to_currency(donationsFYE) %></td>
-        <td><%if (debt <0) %> 
+        <td><%= bad_debts %> </td>
+        <td><%if (debt < -0.01) %> 
         		<span class="text-danger">
         	<% else %>
         		<span class="text-info">
         	<% end %> 
         	<%= number_to_currency(debt, precision: 2)%>
         </span></td>
-        <td><%= link_to 'View', sponsor, class: "btn btn-success"%></td>
+        <% gap = sponsor.total_donations + bad_debts - sponsor.total_payments_aud %>
+        <td><%if (gap < -0.01) %> 
+        		<span class="text-danger">
+        	<% else %>
+        		<span class="text-info">
+        	<% end %> 
+        	<%= number_to_currency(gap, precision: 2)%>
+        </span></td>
+        
+        <td><%= link_to 'TestEMail', sponsor_send_email_path(sponsor, istest: true), class: "btn btn-info"%></td>
+        <td><%= link_to 'EMail', sponsor_send_email_path(sponsor, istest: false), class: "btn btn-info"%></td>
       </tr>
     <% end %>
   	</tbody>

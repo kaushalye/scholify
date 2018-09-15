@@ -2,6 +2,8 @@
 
 <h1>Sponsors</h1>
 <%= link_to 'New Sponsor', new_sponsor_path, class: "btn btn-primary"  %>
+<%= link_to 'FYE Report 17-18', fye_report_path, class: "btn btn-primary"  %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -18,19 +20,21 @@
     <% @sponsors.sort_by{|x| x.id}.each do |sponsor| %>
       <tr>
         <td><%= sponsor.title %></td>
-        <td><%= sponsor.full_name %></td>
+        <td><%= link_to sponsor do sponsor.full_name end %></td>
         <td><%= sponsor.email %></td>
         <td><%= sponsor.phone %></td>
-        <% gap =sponsor.total_donations-sponsor.total_payments_aud %>
-        <td><%if (gap <0) %> 
+        <% bad_debts = sponsor.total_bad_debts_at(Date.today)
+        	gap =sponsor.total_donations + bad_debts -sponsor.total_payments_aud %>
+        <td><%if (gap < -0.01) %> 
         		<span class="text-danger">
         	<% else %>
         		<span class="text-info">
         	<% end %> 
         	<%= number_to_currency(gap, precision: 2)%>
         	</span></td>
-        <td><%= link_to 'View', sponsor, class: "btn btn-success"%></td>
-        <td><%= link_to 'EMail', sponsor_path(sponsor,format: 'pdf'), class: "btn btn-info"%></td>
+        <td><%= link_to 'PDF', sponsor_path(sponsor,format: 'pdf') , class: "btn btn-success"%></td>
+        <td><%= link_to 'TestEMail', sponsor_send_email_path(sponsor, istest: true), class: "btn btn-info"%></td>
+        <td><%= link_to 'EMail', sponsor_send_email_path(sponsor, istest: false), class: "btn btn-info"%></td>
         <td><%= link_to 'Edit', edit_sponsor_path(sponsor),  class: "btn btn-warning" %></td>
         <td><%= link_to 'Delete', sponsor, method: :delete, data: { confirm: 'Are you sure?' },  class: "btn btn-danger"%></td>
       </tr>

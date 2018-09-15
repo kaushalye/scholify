@@ -22,15 +22,20 @@ class SponsorReportPdf < Prawn::Document
    
     bgcolor= "4EEE61"
     balanceStr="Balance prepaid"
-    if (@sponsor.total_donations<@sponsor.total_payments_aud)
+    badDebt=@sponsor.total_bad_debts_at(Date.today)
+    balanceDue= @sponsor.total_donations + badDebt - @sponsor.total_payments_aud
+    if (balanceDue<-0.01)
       bgcolor= "F55151"
       balanceStr="Balance outstanding"
     end
     data = [
       ["Total payments to your scholarships", "#{number_to_currency(@sponsor.total_payments_lkr, unit: "Rs.", precision: 0)}"],
       ["Total value of payments in AUD","#{number_to_currency(@sponsor.total_payments_aud, precision: 2)}"],
-      ["Contributions you've made to-date","#{number_to_currency(@sponsor.total_donations, precision: 2)}" ] ,
-      [balanceStr ,{:content=>"#{number_to_currency( (@sponsor.total_donations-@sponsor.total_payments_aud).abs, precision: 2)}", :background_color=>bgcolor}] ]
+      ["Contributions you've made to-date","#{number_to_currency(@sponsor.total_donations, precision: 2)}" ]]
+    if(badDebt>0.01)  
+      data += [["UMAAV compensations","#{number_to_currency(badDebt, precision: 2)}" ]] 
+    end
+      data +=[[balanceStr ,{:content=>"#{number_to_currency( balanceDue.abs, precision: 2)}", :background_color=>bgcolor}]]
       
     table(data) do
       columns(1).align = :right

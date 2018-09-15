@@ -1,6 +1,8 @@
 class Sponsor < ActiveRecord::Base
   has_many :scholarships
   has_many :donations
+  has_many :bad_debts
+  
   TITLES =  ['Mr.', 'Mrs.', 'Ms.', 'Dr.']
 
     
@@ -79,7 +81,19 @@ class Sponsor < ActiveRecord::Base
     end
     total
    end
-   
+
+  def total_bad_debts_at(eff_date)
+    total = 0
+    self.bad_debts.each do |debt|
+      if (debt.eff_date<= eff_date)
+        total += debt.amount
+      end
+      
+    end
+    total
+  end
+
+     
    def total_donations_before_FYE(fye)
      total = 0
      self.donations.each do |donation|

@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105115446) do
+ActiveRecord::Schema.define(version: 20180915043340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bad_debts", force: :cascade do |t|
+    t.date     "eff_date"
+    t.decimal  "amount"
+    t.string   "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "sponsor_id"
+  end
+
+  add_index "bad_debts", ["sponsor_id"], name: "index_bad_debts_on_sponsor_id", using: :btree
 
   create_table "bulk_transactions", force: :cascade do |t|
     t.date     "settled_date"
@@ -117,5 +128,6 @@ ActiveRecord::Schema.define(version: 20161105115446) do
   add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
+  add_foreign_key "bad_debts", "sponsors"
   add_foreign_key "payments", "bulk_transactions"
 end
