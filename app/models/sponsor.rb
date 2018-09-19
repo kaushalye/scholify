@@ -108,7 +108,7 @@ class Sponsor < ActiveRecord::Base
   def total_donations_within_FYE(fye)
     total = 0
     self.donations.each do |donation|
-      if (donation.bank_date>= Date.new(fye,7,1) and donation.bank_date< Date.new(fye,7,1))
+      if (donation.bank_date>= Date.new(fye,7,1) and donation.bank_date< Date.new(fye+1,7,1))
         total += donation.amount
       end
       
