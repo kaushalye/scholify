@@ -17,10 +17,12 @@ class SponsorsController < ApplicationController
   # GET /sponsors/1.json
   def send_email
     istest=params[:istest]
-    SponsorReportMailer.send_report(@sponsor, istest).deliver_later
+    
    if (istest == 'true')
+     SponsorReportMailer.send_report(@sponsor, session[:user_email]).deliver_later
      redirect_to sponsors_path, notice: 'Test Email sent to sponsor :'+@sponsor.full_name 
    else
+     SponsorReportMailer.send_report(@sponsor, nil).deliver_later
      redirect_to sponsors_path, notice: 'Email sent to sponsor :'+@sponsor.full_name 
    end
   end

@@ -20,7 +20,7 @@
       <th>Schols <%=fye %>-<%=fye+1 %>FYE</th>
       <th>Donations <%=fye %>-<%=fye+1 %>FYE</th>
       <th>Bad Debt@ <%=fye+1 %>0630</th>
-      <th>Prepaid/Accrued @ <%=fye %>0630</th>
+      <th>Prepaid/Accrued @ <%=fye+1%>0630</th>
       <th>Prepaid/Arrears @ <%= cur_date.to_s %></th>
       <th colspan="1"></th>
     </tr>
@@ -64,8 +64,8 @@
         	<%= number_to_currency(gap, precision: 2)%>
         </span></td>
         
-        <td><%= link_to 'TestEMail', sponsor_send_email_path(sponsor, istest: true), class: "btn btn-info"%></td>
-        <td><%= link_to 'EMail', sponsor_send_email_path(sponsor, istest: false), class: "btn btn-info"%></td>
+        <td><%= link_to 'TestEMail', sponsor_send_email_path(sponsor, istest: true), class: "btn btn-info", title: "Mail only to "+ session[:user_email]%></td>
+        <td><%= link_to 'EMail', sponsor_send_email_path(sponsor, istest: false), class: "btn btn-info", title: "Mail to sponsor CC'ing scholarships"%></td>
       </tr>
     <% end %>
   	</tbody>

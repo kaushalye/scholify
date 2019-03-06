@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  timestamp: 2019-03-04 23:18:58
+  renew_year: 1
+  academic_progress: MyText
+  comments: MyText
+
+two:
+  timestamp: 2019-03-04 23:18:58
+  renew_year: 1
+  academic_progress: MyText
+  comments: MyText

@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
       
       if @@allowed_users.include? @user.email
         session[:user_id] = @user.id
+        session[:user_email] = @user.email
         redirect_to root_path, :flash => { :success => "Welcome, #{@user.name}!" }
       else
         redirect_to root_path, :flash => { :warning => "This is bad ! You are not authorized to access this page. Please contact the admin." }
@@ -29,6 +30,7 @@ class SessionsController < ApplicationController
   def destroy
     if current_user
       session.delete(:user_id)
+      session.delete(:user_email)
       flash[:success] = 'See you later!'
     end
     redirect_to root_path

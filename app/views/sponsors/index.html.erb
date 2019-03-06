@@ -33,8 +33,8 @@
         	<%= number_to_currency(gap, precision: 2)%>
         	</span></td>
         <td><%= link_to 'PDF', sponsor_path(sponsor,format: 'pdf') , class: "btn btn-success"%></td>
-        <td><%= link_to 'TestEMail', sponsor_send_email_path(sponsor, istest: true), class: "btn btn-info"%></td>
-        <td><%= link_to 'EMail', sponsor_send_email_path(sponsor, istest: false), class: "btn btn-info"%></td>
+        <td><%= link_to 'TestEMail', sponsor_send_email_path(sponsor, istest: true), class: "btn btn-info", title: "Mail only to " + session[:user_email] %></td>
+        <td><%= link_to 'EMail', sponsor_send_email_path(sponsor, istest: false), class: "btn btn-info", title: "Mail to sponsor CC'ing scholarships"%></td>
         <td><%= link_to 'Edit', edit_sponsor_path(sponsor),  class: "btn btn-warning" %></td>
         <td><%= link_to 'Delete', sponsor, method: :delete, data: { confirm: 'Are you sure?' },  class: "btn btn-danger"%></td>
       </tr>

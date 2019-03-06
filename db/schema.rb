@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180915043340) do
+ActiveRecord::Schema.define(version: 20190304125814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,19 @@ ActiveRecord::Schema.define(version: 20180915043340) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "student_feedbacks", force: :cascade do |t|
+    t.datetime "timestamp"
+    t.integer  "renew_year"
+    t.text     "academic_progress"
+    t.text     "comments"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "student_id"
+    t.string   "email"
+  end
+
+  add_index "student_feedbacks", ["student_id"], name: "index_student_feedbacks_on_student_id", using: :btree
+
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -130,4 +143,5 @@ ActiveRecord::Schema.define(version: 20180915043340) do
 
   add_foreign_key "bad_debts", "sponsors"
   add_foreign_key "payments", "bulk_transactions"
+  add_foreign_key "student_feedbacks", "students"
 end
