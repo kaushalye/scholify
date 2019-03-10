@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
-
+<%
+if (session[:user_email] == nil)
+	session[:user_email] ='indikamee@gmail.com' 
+end
+%>
 <h1>Sponsors</h1>
 <%= link_to 'New Sponsor', new_sponsor_path, class: "btn btn-primary"  %>
 <%= link_to 'FYE Report 17-18', fye_report_path, class: "btn btn-primary"  %>

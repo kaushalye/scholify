@@ -1,7 +1,8 @@
 class Student < ActiveRecord::Base
   has_many :scholarships
   has_many :payments
-
+  has_many :student_feedback
+  
   DEPARTMENTS = ['CSE', 'ENTC', 'MEC']
   FACULTIES = ['ENG', 'TCP']
 
