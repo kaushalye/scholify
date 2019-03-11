@@ -10,9 +10,15 @@ class SessionsController < ApplicationController
                       "des.fdo@gmail.com"
                     ]
   def create
+    #@user=User.from_omniauth(request.env['omniauth.auth'])
+    #puts @user.email
     #render text: request.env['omniauth.auth'].to_yaml
     begin
-      @user = User.from_omniauth(request.env['omniauth.auth'])
+      @resp = request.env['omniauth.auth']
+      @user = User.where(["provider = :p and uid=:uid", { p: @resp.provider, uid: @resp.uid}]).first
+      
+      # Seems to have some problem with oauth library. TODO::upgrade gem  
+      #@user = User.from_omniauth(request.env['omniauth.auth'])
       
       if @@allowed_users.include? @user.email
         session[:user_id] = @user.id
@@ -23,7 +29,7 @@ class SessionsController < ApplicationController
       end
 
     rescue
-      redirect_to root_path, :flash[:warning] = "There was an error while trying to authenticate you. Please contact the admin."
+      redirect_to root_path, :flash => { :warning => "There was an error while trying to authenticate you. Please contact the admin."}
     end
   end
 
