@@ -72,22 +72,24 @@
 </div>
 <% end %>
 
+<% if @student.student_feedback.any? %>
 <div class="panel panel-default">
-  <div class="panel-heading"><h4>Scholarships</h4> </div>
+  <div class="panel-heading"><h4>Student feedback</h4> </div>
   <div class="panel-body">
   <table class="table table-striped">
   <% @student.student_feedback.sort_by{|x| x.timestamp}.each do |fb| %>
-  <th><tr><td><%=fb.timestamp%> Renew Year:<%=fb.renew_year%></td></tr></th>
-  <th><tr><td>
-  Academic Progress: <br/>
-  <%=fb.academic_progress.gsub '\n', "\<br/\>" %>
+  <tr><th><%=localize(fb.timestamp,:format => :long) %> - Renew Year : <%=fb.renew_year%></th></tr>
+  <tr><td>
+  <b>Academic Progress: </b><br/>
+  <%=fb.academic_progress.gsub('\n', '<br/>').html_safe %>
   
-  Notes: <br/>
-  <%=fb.comments.gsub '\n', "\<br/\>" %>
-  </td></tr></th>
+  <br/><b>Notes:</b> <br/>
+  <%=fb.comments.gsub('\n','<br/>').html_safe %>
+  </td></tr>
   <% end %>
     </table>
   </div>
+<% end %>
 </div>
 
 

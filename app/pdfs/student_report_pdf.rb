@@ -38,7 +38,9 @@ class StudentReportPdf < Prawn::Document
     @student.scholarships.sort_by{|x| x.start_date}.reverse.each do |schol|
       add_scholarship_details(schol)
     end
-    
+    if (@student.student_feedback.any?)
+      add_feedback(@student)
+    end
     
   end
 
@@ -65,4 +67,26 @@ class StudentReportPdf < Prawn::Document
       cells.padding = 5
     end
   end
+  
+  
+  def add_feedback(student)
+    move_down 30
+    text "Student feedback:", size: 15, style: :bold
+    
+    student.student_feedback.sort_by{|x| x.timestamp}.each do |fb|
+      data=[[{:content=>"<b>#{fb.timestamp} - Renew Year :#{fb.renew_year}</b>", :colspan=>1, :background_color => "A9CCE3"}]]
+      data+=[["<b>Academic Progress: </b>"+
+        "<br/>#{fb.academic_progress.gsub('\n', '<br/>').html_safe}"+
+        "<br/><b>Notes: </b>"+
+        "<br/>#{fb.comments.gsub('\n','<br/>').html_safe}"]]    
+
+      table(data, :cell_style => { :inline_format => true }) do
+        rows(0).font_style = :bold
+        rows(0).background_color = "A9CCE3"
+        cells.padding = 5
+
+        end
+    end
+  end
+  
 end
