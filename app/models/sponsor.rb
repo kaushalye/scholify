@@ -10,6 +10,16 @@ class Sponsor < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def active_schols_count
+    count =0
+    self.scholarships.each do |schol|
+          if (schol.status=='ACTIVE')
+            count+=1
+          end
+        end
+    count
+  end
+  
   def scholarship_start_year
     firstScholStart = nil
     self.scholarships.each do |schol|

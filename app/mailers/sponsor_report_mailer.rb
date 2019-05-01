@@ -19,7 +19,7 @@ class SponsorReportMailer < ApplicationMailer
     else
       mail(
          to: @sponsor.email,
-         to: 'secretary@umaav.org.au', 
+         #to: 'secretary@umaav.org.au', 
          cc: 'scholarships@umaav.org.au,president@umaav.org.au,secretary@umaav.org.au',
          Bcc: 'nishantha.rajapakshe@gmail.com,randykaru@gmail.com,marasinghe@gmail.com,dassa.dml@gmail.com,kaushalye@gmail.com',
          subject: 'Your UMAAV Scholarship Summary - ' +  @sponsor.title  + ' ' + @sponsor.full_name)

@@ -20,8 +20,19 @@ Sponsored students:
 <% end %>
 </pre>
 <br/>
-Your continued support is vital to the success of the scholarship program. Please make your contribution for 2019 together with any amounts due for the past years at your earliest convenience. <br/>
+<% if (@sponsor.active_schols_count==0) %>
+Our records indicate that all your sponsored students have successfully completed their studies.
 
+We highly appreciate if you could extend your support by sponsoring a new student this year.<br/>
+
+<b>Please reply to this email if you wish to commence a new sponsorship.</b><br/>
+
+<%else%>
+
+Your continued support is vital to the success of the scholarship program. 
+
+Please make your contribution for 2019 together with any amounts due for the past years at your earliest convenience. <br/>
+<% end %>
 At current exchange rate, the cost of scholarship for one year is approximately 330 AUD.</br>
 
 Please use the following bank account details to make future sponsorship deposits and mention your name in the description. <br/>
@@ -32,6 +43,7 @@ Acc Name: University of Moratuwa Alumni Association in Victoria Inc.
 BSB     : 033 157 
 Acc No  : 478 820 
 </pre></b>
+
 
 Thanks and Regards, <br/>
 UMAAV Scholarship Committee.
