@@ -41,8 +41,10 @@ class PaymentsController < ApplicationController
   def create_payments
     @bulk_transaction=BulkTransaction.find(params['bulk_transaction_id'])
     @payments=[]
-    params['payment_details'].each do |payment_details| 
-      pd=payment_details[1] # Value side of key-value pair
+    puts params['payment_details']
+    params['payment_details'].each do |payment_details,pd| 
+      #pd=payment_details[1] # Value side of key-value pair
+      puts pd
       if (pd['send_payment']=="1")
         @payment = Payment.new
         @payment.scholarship = Scholarship.find_by_id(pd['schol_id'].to_f)

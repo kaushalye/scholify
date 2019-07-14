@@ -13,6 +13,7 @@ end
     <tr>
       <th>Title</th>
       <th>Name</th>
+      <th>#Active</th>
       <th>Email</th>
       <th>Phone</th>
       <th>Prepaid/Arrears</th>
@@ -24,7 +25,8 @@ end
     <% @sponsors.sort_by{|x| x.id}.each do |sponsor| %>
       <tr>
         <td><%= sponsor.title %></td>
-        <td><%= link_to sponsor do sponsor.full_name+ sponsor.active_schols_count.to_s end %></td>
+        <td><%= link_to sponsor do sponsor.full_name  end %></td>
+        <td><%= sponsor.active_schols_count.to_s %></td>
         <td><%= sponsor.email %></td>
         <td><%= sponsor.phone %></td>
         <% bad_debts = sponsor.total_bad_debts_at(Date.today)

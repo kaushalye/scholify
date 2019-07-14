@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -23,9 +22,8 @@ ActiveRecord::Schema.define(version: 20190304125814) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "sponsor_id"
+    t.index ["sponsor_id"], name: "index_bad_debts_on_sponsor_id", using: :btree
   end
-
-  add_index "bad_debts", ["sponsor_id"], name: "index_bad_debts_on_sponsor_id", using: :btree
 
   create_table "bulk_transactions", force: :cascade do |t|
     t.date     "settled_date"
@@ -54,10 +52,9 @@ ActiveRecord::Schema.define(version: 20190304125814) do
     t.datetime "updated_at",     null: false
     t.date     "bank_date"
     t.string   "account"
+    t.index ["scholarship_id"], name: "index_donations_on_scholarship_id", using: :btree
+    t.index ["sponsor_id"], name: "index_donations_on_sponsor_id", using: :btree
   end
-
-  add_index "donations", ["scholarship_id"], name: "index_donations_on_scholarship_id", using: :btree
-  add_index "donations", ["sponsor_id"], name: "index_donations_on_sponsor_id", using: :btree
 
   create_table "payments", force: :cascade do |t|
     t.integer  "scholarship_id"
@@ -71,10 +68,9 @@ ActiveRecord::Schema.define(version: 20190304125814) do
     t.integer  "effective_year"
     t.string   "effective_month"
     t.date     "bank_date"
+    t.index ["bulk_transaction_id"], name: "index_payments_on_bulk_transaction_id", using: :btree
+    t.index ["scholarship_id"], name: "index_payments_on_scholarship_id", using: :btree
   end
-
-  add_index "payments", ["bulk_transaction_id"], name: "index_payments_on_bulk_transaction_id", using: :btree
-  add_index "payments", ["scholarship_id"], name: "index_payments_on_scholarship_id", using: :btree
 
   create_table "scholarships", force: :cascade do |t|
     t.decimal  "amount"
@@ -85,10 +81,9 @@ ActiveRecord::Schema.define(version: 20190304125814) do
     t.integer  "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["sponsor_id"], name: "index_scholarships_on_sponsor_id", using: :btree
+    t.index ["student_id"], name: "index_scholarships_on_student_id", using: :btree
   end
-
-  add_index "scholarships", ["sponsor_id"], name: "index_scholarships_on_sponsor_id", using: :btree
-  add_index "scholarships", ["student_id"], name: "index_scholarships_on_student_id", using: :btree
 
   create_table "sponsors", force: :cascade do |t|
     t.string   "title"
@@ -109,9 +104,8 @@ ActiveRecord::Schema.define(version: 20190304125814) do
     t.datetime "updated_at",        null: false
     t.integer  "student_id"
     t.string   "email"
+    t.index ["student_id"], name: "index_student_feedbacks_on_student_id", using: :btree
   end
-
-  add_index "student_feedbacks", ["student_id"], name: "index_student_feedbacks_on_student_id", using: :btree
 
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
@@ -135,11 +129,10 @@ ActiveRecord::Schema.define(version: 20190304125814) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "email"
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
+    t.index ["provider"], name: "index_users_on_provider", using: :btree
+    t.index ["uid"], name: "index_users_on_uid", using: :btree
   end
-
-  add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
-  add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
-  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
   add_foreign_key "bad_debts", "sponsors"
   add_foreign_key "payments", "bulk_transactions"

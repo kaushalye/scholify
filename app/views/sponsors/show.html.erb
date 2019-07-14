@@ -8,7 +8,7 @@
   <p>Total value of payments in AUD:<span class="text-info"> <%= number_to_currency(@sponsor.total_payments_aud, precision: 2) %></span></p>
   
   <p>Contributions made by you:<span class="text-info"> <%= number_to_currency(@sponsor.total_donations, precision: 2) %></span></p>
-  <p>Componsatoins by UMAAV :<span class="text-info"> <%= number_to_currency(@sponsor.total_bad_debts_at(Date.today), precision: 2) %></span></p>
+  <p>Compensations by UMAAV :<span class="text-info"> <%= number_to_currency(@sponsor.total_bad_debts_at(Date.today), precision: 2) %></span></p>
 </div>
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Your Sponsorships</h4> </div>

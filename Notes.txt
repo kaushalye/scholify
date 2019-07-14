@@ -74,6 +74,10 @@ heroku pg:backups:capture
 heroku pg:backups:download
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d scholify_development latest.dump
 
+local instance
+postgres , postgres
+
+
 environment variables
 source env.sh
 
