@@ -10,11 +10,11 @@
 Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'sg2plcpnl0123.prod.sin2.secureserver.net',
+    address:              'mail.umaav.org.au',
     port:                 465,
     domain:               'umaav.org.au',
     user_name:            'secretary@umaav.org.au',
-    password:             'umaav123+',
+    password:             'qaqnv9s192kb',
     authentication:       'login',
     enable_starttls_auto: true ,
     ssl: true 

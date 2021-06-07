@@ -70,7 +70,7 @@ class SponsorReportPdf < Prawn::Document
     move_down 30
     text "Summary of sponsorship : #{schol.student.external_name}", size: 15, style: :bold
     nextDonationDue = schol.get_next_donation_due_date
-    if (nextDonationDue < Date.today and nextDonationDue < schol.end_date )
+    if (nextDonationDue < Date.today and nextDonationDue < schol.end_date and nextDonationDue.year > (Date.today.year - 3) )
       text "Contributions due from : #{nextDonationDue}", size: 15, style: :bold, :color => "ff0000"
    end
    totalAUD=0

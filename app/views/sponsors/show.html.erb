@@ -46,7 +46,7 @@
 <div class="panel panel-default">
   <div class="panel-heading"><h4>Summary of sponsorship : <%= link_to schol do schol.student.full_name end%></h4></div>
   <% nextDonationDue = schol.get_next_donation_due_date %>
-  <% if (nextDonationDue < Date.today and nextDonationDue < schol.end_date ) %> 
+  <% if (nextDonationDue < Date.today and nextDonationDue < schol.end_date and nextDonationDue.year > (Date.today.year - 3) ) %> 
   	<h4><span class="text-danger">Contributions due from <%=nextDonationDue%></span></h4>
   <% end %>
    <% totalAUD=0 %>
