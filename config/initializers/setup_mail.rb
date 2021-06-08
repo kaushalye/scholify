@@ -17,6 +17,7 @@ Rails.application.configure do
     password:             'qaqnv9s192kb',
     authentication:       'login',
     enable_starttls_auto: true ,
+    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE, 
     ssl: true 
   }
   config.action_mailer.file_settings = { :location => Rails.root.join('/home/indika/Downloads/mail') }

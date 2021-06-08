@@ -93,3 +93,12 @@ rails g migration alter_effective_month_table_payment effective_month:string
 rails generate model student_feedback timestamp:datetime renew_year:integer academic_progress:text comments:text 
 
 
+
+
+
+
+# Issues
+Mail serer setup issue
+https://stackoverflow.com/questions/13408898/hostname-does-not-match-the-server-certificate-cannot-send-email#:~:text=If%20the%20certificate%20is%20issued,%2C%20use%20the%20%3Aopenssl_verify_mode%20option.
+
+
