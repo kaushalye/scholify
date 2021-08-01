@@ -125,6 +125,12 @@ class Sponsor < ActiveRecord::Base
     end
     total
   end
+
+  def get_balance_due()
+    badDebt=self.total_bad_debts_at(Date.today)
+    balanceDue= self.total_donations + badDebt - self.total_payments_aud
+    balanceDue
+  end
        
   # def outstanding
   #   to_pay = 0

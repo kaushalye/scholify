@@ -27,12 +27,11 @@ We highly appreciate if you could extend your support by sponsoring a new studen
 
 <b>Please reply to this email if you wish to commence a new sponsorship.</b><br/>
 
-<%else%>
+<%elsif (@sponsor.get_balance_due < 50)%>
 
 Your continued support is vital to the success of the scholarship program. 
 
 Please make your contribution for 2021 together with any amounts due for the past years at your earliest convenience. <br/>
-<% end %>
 At current exchange rate, the cost of scholarship for one year is approximately 300 AUD.</br>
 
 Please use the following bank account details to make future sponsorship deposits and mention your name in the description. <br/>
@@ -44,6 +43,7 @@ BSB     : 033 157
 Acc No  : 478 820 
 </pre></b>
 
+<% end %>
 
 Thanks and Regards, <br/>
 UMAAV Scholarship Committee.
