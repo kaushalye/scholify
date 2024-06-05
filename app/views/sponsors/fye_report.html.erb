@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<% fye=2020
+<% fye=2022
 	cur_date = Date.today 
 %>
 
@@ -17,6 +17,7 @@
       
       <th>ScholPayments @<%=fye %>0630</th>
       <th>Donations @<%=fye %>0630</th>
+      <th>Bad Debt@ <%=fye %>0630</th>
       <th>Accrued @ <%=fye %>0701</th>
       <th>Schols <%=fye %>-<%=fye+1 %>FYE</th>
       <th>Donations <%=fye %>-<%=fye+1 %>FYE</th>
@@ -34,16 +35,17 @@
         <% 
         	paymentsSOY=sponsor.total_payments_aud_before_FYE(fye)
         	donationsSOY=sponsor.total_donations_before_FYE(fye)
-        	accruedSOY=paymentsSOY-donationsSOY
+          bad_debts_SOY = sponsor.total_bad_debts_at(Date.new(fye,6,30))
+          accruedSOY=(donationsSOY + bad_debts_SOY) - paymentsSOY
         	paymentsFYE=sponsor.total_payments_aud_within_FYE(fye)
         	donationsFYE=sponsor.total_donations_within_FYE(fye)
         	bad_debts = sponsor.total_bad_debts_at(Date.new(fye+1,6,30))
-        	debt = (donationsFYE + bad_debts) - (accruedSOY + paymentsFYE) 
+        	debt = (donationsFYE + donationsSOY + bad_debts) - (paymentsSOY + paymentsFYE) 
         %>
         
         <td><%= number_to_currency(paymentsSOY) %></td>
         <td><%= number_to_currency(donationsSOY) %></td>
-        
+        <td><%= bad_debts_SOY %> </td>
         <td><%= number_to_currency(accruedSOY) %></td>
 
 		<td><%= number_to_currency(paymentsFYE) %></td>
