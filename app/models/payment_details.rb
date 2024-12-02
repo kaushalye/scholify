@@ -1,4 +1,4 @@
-class Payment_Details
+class PaymentDetails
   @bt
   @schol
   @send_payment

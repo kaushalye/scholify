@@ -18,7 +18,7 @@ class BulkTransactionsController < ApplicationController
     @scholarships = Scholarship.where(status: "ACTIVE")
     @payment_details = []
     @scholarships.each do |schol|
-       @payment_details.push (Payment_Details.new(schol, @bulk_transaction))
+       @payment_details.push (PaymentDetails.new(schol, @bulk_transaction))
     end
   end
    
