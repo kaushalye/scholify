@@ -10,15 +10,18 @@
 Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'mail.umaav.org.au',
+    address:              'sh-cp4-au.yyz2.servername.online',
     port:                 465,
     domain:               'umaav.org.au',
-    user_name:            'secretary@umaav.org.au',
-    password:             'qaqnv9s192kb',
+    user_name:            'scholarships@umaav.org.au',
+    password:             '4vd5wahplb2y',
     authentication:       'login',
     enable_starttls_auto: true ,
     openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE, 
-    ssl: true 
+    ssl: true,
+    tls: true,
+    open_timeout: 30,
+    read_timeout: 30 
   }
   config.action_mailer.file_settings = { :location => Rails.root.join('/home/indika/Downloads/mail') }
     
