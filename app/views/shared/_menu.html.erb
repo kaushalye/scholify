@@ -18,7 +18,7 @@
         <li class="nav navbar-nav pull-right"><%= link_to 'Log Out', logout_path, method: :delete %></li>
       <% else %>
         <!--<li><%=link_to 'Twitter', '/auth/twitter' %></li>-->
-          <li><%= link_to 'Google+', '/auth/google' %></li>
+          <li><%= button_to 'Sign in with Google', '/auth/google', method: :post, class: "btn btn-link" %></li>
       <% end %>
       </ul>
     </div>

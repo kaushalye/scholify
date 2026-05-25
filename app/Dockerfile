@@ -1,5 +1,5 @@
 #base
-FROM ruby:2.2.1
+FROM ruby:3.3.0
 
 ENV HOME /home/rails/webapp
 

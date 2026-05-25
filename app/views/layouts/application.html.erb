@@ -19,7 +19,7 @@
       <h1>Please login!</h1>
       <br>
       <p>Please login using
-        <%= link_to 'Google+', '/auth/google', class: "btn btn-primary"  %> to continue...</p>
+        <%= button_to 'Sign in with Google', '/auth/google', method: :post, class: "btn btn-primary" %> to continue...</p>
     </div>
 <% end %>
 </div>
