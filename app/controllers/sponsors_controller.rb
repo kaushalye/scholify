@@ -19,7 +19,7 @@ class SponsorsController < ApplicationController
     istest=params[:istest]
     
    if (istest == 'true')
-     SponsorReportMailer.send_report(@sponsor, session[:user_email]).deliver_later
+     SponsorReportMailer.send_report(@sponsor, session[:user_email]).deliver_now
      redirect_to sponsors_path, notice: 'Test Email sent to sponsor :'+@sponsor.full_name 
    else
      SponsorReportMailer.send_report(@sponsor, nil).deliver_later
